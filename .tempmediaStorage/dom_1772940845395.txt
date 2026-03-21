@@ -1,0 +1,74 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (21,54)<a class='gs_btnMNT gs_in_ib gs_btn_lrge' href='javascript:void(0)' id='gs_hdr_mnu' role='button' />
+	[1] (21,54)<span  />
+[2] (102,54)<a aria-label='Homepage' href='/schhp?hl=en' id='gs_hdr_lgo' />
+[3] (915,54)<a aria-label='Search' class='gs_btnTSB gs_in_ib gs_btn_lrge' href='javascript:void(0)' id='gs_hdr_sre' role='button' />
+	[4] (915,54)<span  />
+[5] (969,54)<a href='https://accounts.google.com/Login?hl=en&continue=https://scholar.google.com/schhp%3Fhl%3Den' id='gs_hdr_act_s'>Sign in />
+[6] (851,160)<a class='gsc_rsb_s' href='/citations?hl=en' id='gsc_rsb_gpl'>Get my own profile />
+Cited by
+All
+Since 2021
+[7] (760,359)<a class='gsc_rsb_f gs_ibl' href='javascript:void(0)' title='This is the number of citations to all publications. The second column has the "recent" version of this metric which is the number of new citations in the last 5 years to all publications.'>Citations />
+55
+53
+[8] (757,390)<a class='gsc_rsb_f gs_ibl' href='javascript:void(0)' title='h-index is the largest number h such that h publications have at least h citations. The second column has the "recent" version of this metric which is the largest number h such that h publications have at least h new citations in the last 5 years.'>h-index />
+5
+4
+[9] (760,421)<a class='gsc_rsb_f gs_ibl' href='javascript:void(0)' title='i10-index is the number of publications with at least 10 citations. The second column has the "recent" version of this metric which is the number of publications that have received at least 10 new citations in the last 5 years.'>i10-index />
+2
+2
+0
+20
+10
+2021
+2022
+2023
+2024
+2025
+2026
+[10] (798,751)<a class='gsc_g_a' href='javascript:void(0)' />
+[11] (823,751)<a class='gsc_g_a' href='javascript:void(0)' />
+[12] (848,683)<a class='gsc_g_a' href='javascript:void(0)' />
+[13] (873,642)<a class='gsc_g_a' href='javascript:void(0)' />
+[14] (898,676)<a class='gsc_g_a' href='javascript:void(0)' />
+[15] (923,765)<a class='gsc_g_a' href='javascript:void(0)' />
+[16] (672,161)<a class='gsc_prf_btn gsc_prf_btn_top gs_btnFA gsc_prf_btn_act' href='javascript:void(0)' id='gsc_prf_btnf' role='button' />
+	[17] (651,161)<span  />
+	[18] (680,161)<span >Follow />
+KARTHIKEYAN S
+[19] (276,213)<a class='gsc_prf_ila' href='/citations?view_op=view_org&hl=en&org=8870041784653992519'>Sri Krishna College of Engineering and Technology />
+Verified email at skcet.ac.in
+[20] (191,290)<a class='gsc_prf_inta gs_ibl' href='/citations?view_op=search_authors&hl=en&mauthors=label:power_electronics'>Power Electronics />
+[21] (51,419)<a class='gsc_a_a' href='/citations?hl=en&user=bLq1SYkAAAAJ&view_op=list_works&sortby=title'>Title />
+Cited by
+[22] (688,418)<a class='gsc_a_a' href='/citations?hl=en&user=bLq1SYkAAAAJ&view_op=list_works&sortby=pubdate'>Year />
+[23] (259,491)<a class='gsc_a_at' href='/citations?view_op=view_citation&hl=en&user=bLq1SYkAAAAJ&citation_for_view=bLq1SYkAAAAJ:UeHWp8X0CEIC'>Dynamic objects detection and tracking from videos for surveillance applications />
+S Gobhinath, S Sophia, S Karthikeyan, K Janani
+2022 8th International Conference on Advanced Computing and Communication …
+[24] (651,494)<a class='gsc_a_ac gs_ibl' href='https://scholar.google.com/scholar?oi=bibs&hl=en&cites=4087690366446973890'>17 />
+2022
+[25] (173,601)<a class='gsc_a_at' href='/citations?view_op=view_citation&hl=en&user=bLq1SYkAAAAJ&citation_for_view=bLq1SYkAAAAJ:9yKSN-GCB0IC'>Solar based fast tag charger for electrical vehicle />
+S Karthikeyan, H Bragruthshibu, R Logesh, K Srinivasan, S Tarjanbabu
+2021 7th international conference on advanced computing and communication …
+[26] (651,603)<a class='gsc_a_ac gs_ibl' href='https://scholar.google.com/scholar?oi=bibs&hl=en&cites=485459684388091795'>10 />
+2021
+[27] (266,710)<a class='gsc_a_at' href='/citations?view_op=view_citation&hl=en&user=bLq1SYkAAAAJ&citation_for_view=bLq1SYkAAAAJ:UebtZRa9Y70C'>Design and implementation of IoT based accident detection and prevention system />
+S Karthikeyan, J Kiruthik, S Madumitha, R Manikandan, VP Raj
+2023 7th International Conference on Trends in Electronics and Informatics …
+[28] (653,713)<a class='gsc_a_ac gs_ibl' href='https://scholar.google.com/scholar?oi=bibs&hl=en&cites=13976218332694595992'>7 />
+2023
+[29] (309,820)<a class='gsc_a_at' href='/citations?view_op=view_citation&hl=en&user=bLq1SYkAAAAJ&citation_for_view=bLq1SYkAAAAJ:IjCSPb-OGe4C'>Detection and analysis of earlier cognitive disorder using ai based transcranial magnetic stimulator />
+S Gobhinath, S Karhtikeyan, K Janani, U Arunkumar
+2022 8th international conference on advanced computing and communication …
+[30] (653,822)<a class='gsc_a_ac gs_ibl' href='https://scholar.google.com/scholar?oi=bibs&hl=en&cites=8468686632152706152'>7 />
+2022
+[31] (311,946)<a class='gsc_a_at' href='/citations?view_op=view_citation&hl=en&user=bLq1SYkAAAAJ&citation_for_view=bLq1SYkAAAAJ:d1gkVwhDpl0C'>Design and implementation of SEPIC converter based nine-level MLI fed IM with PI, FLC, and ANN controller />
+S Karthikeyan, K Lakshmi, S Gobhinath
+[32] (653,932)<a class='gsc_a_ac gs_ibl' href='https://scholar.google.com/scholar?oi=bibs&hl=en&cites=15610700229305556444'>5 />
+2020
+
+</current_dom>
