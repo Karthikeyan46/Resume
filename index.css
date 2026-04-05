@@ -519,9 +519,24 @@ h2 {
 /* Memberships Strip (inside About Me) */
 .memberships-strip {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
     flex-wrap: wrap;
+}
+
+.memberships-group {
+    display: flex;
     gap: 1.5rem;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.memberships-divider {
+    width: 1px;
+    height: 60px;
+    background: var(--glass-border);
+    flex-shrink: 0;
 }
 
 .membership-item {
