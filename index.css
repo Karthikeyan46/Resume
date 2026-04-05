@@ -516,6 +516,65 @@ h2 {
 .pub-card.hidden { display: none; }
 
 /* Book thumb */
+/* Professional Memberships */
+.prof-body-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.2rem;
+}
+
+.prof-body-card {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.prof-body-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.prof-body-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    padding: 8px;
+}
+
+.prof-body-info h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    margin-bottom: 0.3rem;
+}
+
+.prof-body-info p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+}
+
+.prof-id {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-secondary);
+    background: rgba(192,132,252,0.1);
+    border: 1px solid rgba(192,132,252,0.2);
+    padding: 0.2rem 0.7rem;
+    border-radius: 50px;
+}
+
 /* Roles & Professional Bodies */
 .roles-list {
     list-style: none;
