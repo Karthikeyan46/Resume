@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.amazon.in)",
+      "WebFetch(domain:images-na.ssl-images-amazon.com)",
+      "Bash(curl -L \"https://images-na.ssl-images-amazon.com/images/P/0367495309.jpg\" -o \"D:/ap/RESUME/book-cover.jpg\")",
+      "WebSearch",
+      "WebFetch(domain:www.iaeng.org)",
+      "WebFetch(domain:csteachers.org)",
+      "WebFetch(domain:icses.co)",
+      "WebFetch(domain:iaoip.org)",
+      "Bash(curl -k -L -o \"D:/ap/RESUME/csta-logo.png\" \"https://csteachers.org/wp-content/uploads/2023/03/csta-logo.png\" -w \"\\\\nHTTP_CODE:%{http_code} SIZE:%{size_download}\")",
+      "WebFetch(domain:www.i-cses.com)",
+      "WebFetch(domain:independent.academia.edu)",
+      "Bash(ls -la D:/ap/RESUME/*logo*)"
+    ]
+  }
+}

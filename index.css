@@ -204,6 +204,19 @@ nav.scrolled {
     box-shadow: 0 10px 20px rgba(129, 140, 248, 0.3);
 }
 
+.btn-secondary {
+    background: transparent;
+    border: 2px solid var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--accent-primary);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(129, 140, 248, 0.4);
+}
+
 /* Sections */
 section {
     padding: 40px 10%;
