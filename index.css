@@ -238,6 +238,11 @@ nav.scrolled {
     box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
 }
 
+.wa-icon {
+    font-size: 0.75rem;
+    line-height: 1;
+}
+
 /* Sections */
 section {
     padding: 40px 10%;
