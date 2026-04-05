@@ -382,6 +382,21 @@ h2 {
     text-decoration: underline;
 }
 
+.book-thumb {
+    width: 70px;
+    border-radius: 4px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.book-thumb:hover {
+    transform: scale(1.05);
+}
+
+.book-inline-card:hover {
+    transform: translateY(-5px);
+}
+
 /* Featured Publication Section */
 #featured-book {
     position: relative;
