@@ -23,6 +23,41 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
+// Count-up animation for pub stats
+function animateCount(el, target, suffix) {
+    let start = 0;
+    const duration = 1500;
+    const step = 16;
+    const increment = target / (duration / step);
+
+    const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+            start = target;
+            clearInterval(timer);
+        }
+        el.textContent = Math.floor(start) + suffix;
+    }, step);
+}
+
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            document.querySelectorAll('.pub-stat-num').forEach(el => {
+                const raw = el.textContent.trim();
+                const suffix = raw.includes('+') ? '+' : '';
+                const target = parseInt(raw.replace('+', ''));
+                el.textContent = '0' + suffix;
+                animateCount(el, target, suffix);
+            });
+            statsObserver.disconnect();
+        }
+    });
+}, { threshold: 0.3 });
+
+const statsEl = document.querySelector('.pub-stats');
+if (statsEl) statsObserver.observe(statsEl);
+
 // Publication filter tabs → show/hide accordion sections
 document.querySelectorAll('.pub-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
