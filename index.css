@@ -560,9 +560,15 @@ h2 {
 
 /* Professional Memberships */
 .prof-body-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1.2rem;
+}
+
+.prof-body-grid .prof-body-card {
+    flex: 1 1 160px;
+    max-width: 200px;
 }
 
 .prof-body-card {
