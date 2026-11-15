@@ -12,12 +12,12 @@
     <meta property="og:url" content="https://karthikeyans.vercel.app/">
     <meta property="og:title" content="Karthikeyan.S | Academic Portfolio">
     <meta property="og:description" content="Academic portfolio of Karthikeyan.S, Assistant Professor & Researcher in Computer Science and Engineering with 9+ years of experience in AI and IoT.">
-    <meta property="og:image" content="https://karthikeyans.vercel.app/profile.jpg">
+    <meta property="og:image" content="https://karthikeyans.vercel.app/assets/img/profile.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Karthikeyan.S | Academic Portfolio">
     <meta name="twitter:description" content="Academic portfolio of Karthikeyan.S, Assistant Professor & Researcher in Computer Science and Engineering with 9+ years of experience in AI and IoT.">
-    <meta name="twitter:image" content="https://karthikeyans.vercel.app/profile.jpg">
-    <link rel="stylesheet" href="index.css">
+    <meta name="twitter:image" content="https://karthikeyans.vercel.app/assets/img/profile.jpg">
+    <link rel="stylesheet" href="assets/css/index.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 </head>
@@ -31,7 +31,8 @@
             <li><a href="#experience">Experience</a></li>
             <li><a href="#publications">Publications</a></li>
             <li><a href="#certifications">Certifications</a></li>
-            <li><a href="Karthikeyan_S_Resume.docx" download>Resume</a></li>
+            <li><a href="assets/docs/Karthikeyan_S_Resume.docx" download>Resume</a></li>
+            <li><a href="vault.html" class="nav-vault">Vault</a></li>
         </ul>
     </nav>
 
@@ -41,12 +42,12 @@
             <p class="reveal">Academician, published author, and researcher specializing in AI and IoT. Bridging theory and innovation through rigorous research and impactful teaching.</p>
             <div class="reveal" style="display: flex; gap: 1rem; flex-wrap: wrap;">
                 <a href="#about" class="btn btn-primary">Discover More</a>
-                <a href="Karthikeyan_S_Resume.docx" download class="btn btn-secondary"><span style="font-size: 0.9rem;">&#128229;</span> Download Resume</a>
+                <a href="assets/docs/Karthikeyan_S_Resume.docx" download class="btn btn-secondary"><span style="font-size: 0.9rem;">&#128229;</span> Download Resume</a>
             </div>
         </div>
         <div class="hero-right reveal" style="flex-direction: column; align-items: center; gap: 2rem;">
             <div class="profile-img-container">
-                <img src="profile.jpg" alt="karthikeyans_academic_profile - Profile Picture" class="profile-img">
+                <img src="assets/img/profile.jpg" alt="karthikeyans_academic_profile - Profile Picture" class="profile-img">
             </div>
 
             <div class="card contact-card" style="width: 100%; padding: 2rem;">
@@ -89,7 +90,7 @@
 
             <div class="book-mini-card" style="flex-shrink: 0; display: flex; align-items: center; gap: 1rem; padding: 0.8rem; background: rgba(255, 255, 255, 0.05); border-radius: 12px; border: 1px solid var(--glass-border);">
                 <a href="https://www.amazon.in/Convergence-Blockchain-AI-IoT-Platform/dp/0367495309" target="_blank" style="flex-shrink: 0;">
-                    <img src="book-cover.jpg" alt="Book Cover" style="width: 45px; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                    <img src="assets/img/book-cover.jpg" alt="Book Cover" style="width: 45px; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
                 </a>
                 <div style="display: flex; flex-direction: column; gap: 0.3rem;">
                     <span style="font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent-primary);">Featured Publication</span>
@@ -153,16 +154,10 @@
 
 
     <section id="publications">
-        <h2 class="reveal">Research & Publications</h2>
+        <h2 class="reveal">Research &amp; Publications</h2>
 
-        <!-- Stats bar -->
-        <div class="pub-stats reveal">
-            <div class="pub-stat"><span class="pub-stat-num">20+</span><span class="pub-stat-label">Conferences</span></div>
-            <div class="pub-stat"><span class="pub-stat-num">6</span><span class="pub-stat-label">Journals</span></div>
-            <div class="pub-stat"><span class="pub-stat-num">6</span><span class="pub-stat-label">Book Chapters</span></div>
-            <div class="pub-stat"><span class="pub-stat-num">1</span><span class="pub-stat-label">Book</span></div>
-            <div class="pub-stat"><span class="pub-stat-num">1</span><span class="pub-stat-label">Patent</span></div>
-        </div>
+        <!-- Stats bar — counts computed from the same records that fill the lists below -->
+        <div class="pub-stats reveal" id="pub-stats"></div>
 
         <!-- Filter tabs -->
         <div class="pub-filters reveal">
@@ -174,458 +169,34 @@
             <button class="pub-filter-btn" data-filter="patent">Patent</button>
         </div>
 
-        <!-- Accordion sections -->
-        <div class="dropdown-container reveal">
-
-            <!-- BOOK -->
-            <details class="dropdown-item" data-section="book">
-                <summary>Book Published</summary>
-                <div class="dropdown-content">
-                    <ul>
-                        <li><a href="https://www.routledge.com/Convergence-of-Blockchain-AI-and-IoT-A-Digital-Platform/Balamurugan-Poongodi-R-S-Sharma/p/book/9780367495305" target="_blank">Convergence of Blockchain, AI and IoT: A Digital Platform</a> — CRC Press, Taylor &amp; Francis Group.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <!-- JOURNALS -->
-            <details class="dropdown-item" data-section="journal">
-                <summary>Journals</summary>
-                <div class="dropdown-content">
-                    <ul>
-                        <li><a href="https://www.jneonatalsurg.com/index.php/jns/article/view/3003" target="_blank">An Efficient Brain Tumor Classification And Segmentation Using Deep Learning Features For ML Algorithms</a> — Journal of Neonatal Surgery, Vol. 14 No. 11S, 2025.</li>
-                        <li><a href="https://jisem-journal.com/index.php/journal/article/view/4897" target="_blank">Human and Object Detection Deep Learning Model Using R-CNN</a> — JISEM, Vol. 10 No. 30s, 2025.</li>
-                        <li><a href="https://ijettjournal.org/archive/ijett-v71i3p201" target="_blank">Secure and Optimized Communication in the Internet of Things using DNA Cryptography with X.509 Digital Attributes</a> — IJETT, 2023, 71(3).</li>
-                        <li><a href="https://link.springer.com/article/10.3103/S875669902470016X" target="_blank">Secure Data Transmission in Smart Cities Using DNA Cryptography with LZW Compression Algorithm</a> — Optoelectronics, Instrumentation &amp; Data Processing, Vol. 60, pp. 156–167, 2024.</li>
-                        <li>Password Attack Resistance using PGRP — IJCRD, Vol. 3, Issue 2, 2014.</li>
-                        <li><a href="https://www.academia.edu/33108404/Enhanced_Multi_Owner_Security_System_in_Cloud_Environment_using_Offensive_Digital_Forensics_and_Decoy_Technology_DFD_" target="_blank">Enhanced Multi Owner Security System in Cloud Environment using Offensive (DFD)</a> — IJAER, Vol. 10, Issue 38, 2015.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <!-- PATENT -->
-            <details class="dropdown-item" data-section="patent">
-                <summary>Patent</summary>
-                <div class="dropdown-content">
-                    <ul>
-                        <li>Published patent titled "TRACKING GOLD JEWEL USING GOLD JEWEL IDENTIFIER" — Published on 12/03/2021.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <!-- BOOK CHAPTERS -->
-            <details class="dropdown-item" data-section="chapter">
-                <summary>Book Chapters</summary>
-                <div class="dropdown-content">
-                    <ul>
-                        <li><a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781351011419-6/taxonomy-security-attacks-dna-computing-selvaraj-karthikeyan-patan-rizwan-balusamy-balamurugan" target="_blank">Taxonomy of Security Attacks in Advances of DNA Computing in Cryptography</a> — CRC Press / Chapman &amp; Hall.</li>
-                        <li><a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9780367808495-7/text-mining-karthikeyan-jeevanandam-jotheeswaran-balamurugan-jyotir-moy-chatterjee" target="_blank">Text Mining</a> — Natural Language Processing in AI, Apple Academic / CRC Press.</li>
-                        <li><a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781003036739-9/key-technologies-enabling-big-data-analytics-iot-karthikeyan-balamurugan-balusamy-firoz-khan" target="_blank">Key Technologies Enabling Big Data Analytics for IoT</a> — IoT &amp; Big Data Analytics, CRC Press.</li>
-                        <li><a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781003036739-1/taxonomy-big-data-analytics-solutions-internet-things-karthikeyan-balamurugan-balusamy-poongodi-firoz-khan" target="_blank">Taxonomy of Big Data and Analytics Solutions for Internet of Things</a> — IoT &amp; Big Data Analytics, CRC Press.</li>
-                        <li><a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9780429352898-3/internet-things-karthikeyan-balamurugan" target="_blank">Internet of Things</a> — Blockchain, IoT &amp; AI Handbook, CRC Press.</li>
-                        <li><a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781003558118-4/ransomware-attacks-cyber-space-mitigation-strategies-rajkumar-karthikeyan-kavitha-hariharan" target="_blank">Ransomware Attacks in Cyber Space and Mitigation Strategies</a> — CRC Press, Taylor &amp; Francis.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <!-- CONFERENCES -->
-            <details class="dropdown-item" data-section="conference">
-                <summary>International Conferences</summary>
-                <div class="dropdown-content">
-                    <ul>
-                        <li>Predicting Cervical Cancer with Swarm Intelligence: An Innovative CPSO-GA Hybrid Feature Selection Method Using Stacked Ensemble Learning — IC3IoT, IEEE, 2024.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10550386" target="_blank">E-commerce-based Smart Recommendation System using Element-by-Element Collaborative Filtering</a> — IC3IoT, IEEE, 2024.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10617375" target="_blank">Analysis of Customer Churn for Telecom Company with SMOTE-ENN and Hyperparameter Tuning RandomizedSearchCV</a> — APCI, IEEE, June 2024.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10550203" target="_blank">Academates: Your Path to Personalized Learning</a> — IC3IoT, IEEE, 2024.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10673531" target="_blank">Software Defect Classifier Using Linear Regression And Asymmetric Correlation Heatmap</a> — APCIT, IEEE, July 2024.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10497424" target="_blank">Long Short-Term Memory-Based Next Keyword Prediction</a> — ESCI, IEEE, Mar 2024.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10488954" target="_blank">Intelligent Chatbot for Hospital Recommendation System</a> — IEEE, Mar 2024.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10560135" target="_blank">One Stop Mentorship (OSM) – A Mobile Application for Career Development</a> — ICAECC, IEEE, 2023.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10560130" target="_blank">Spypark: The Innovative Mobile Application for Online Parking Reservation</a> — ICAECC, IEEE, 2023.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10150786" target="_blank">An Innovation Development of Decentralized Prove Piercing Data Recuperation Using Improved Red in Mobile Grid Computing</a> — ICDCECE, IEEE, Apr 2023.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10151437" target="_blank">An Intelligent Innovation of Electrochemical Energy Based Smart Industrial Automation</a> — ICDCECE, IEEE, Apr 2023.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10059619" target="_blank">An Exploration on Building of Smart Office through AI and IoT</a> — ICERECT, IEEE, Dec 2022.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10060657" target="_blank">An Investigation on Fat Tree Topology ARP Spoof Detection Using Software Defined Networking</a> — ICERECT, IEEE, Dec 2022.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/10072830" target="_blank">Two Dimensional Cellular Automata Encryption Method for Security</a> — IC3I, IEEE, Dec 2022.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/9915855" target="_blank">Secured Data Compression and Data Authentication in IoT Networks Using LZW Compression Based X.509 Certification</a> — ICDSIS, IEEE, 2022.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/9917861" target="_blank">JU QUERY – Web App for Community-Based Learning</a> — ICICICT, IEEE, Oct 2022.</li>
-                        <li><a href="https://ieeexplore.ieee.org/document/9544100" target="_blank">AI-Based Content Filtering System Using an Age Prediction Algorithm</a> — ICIRCA, IEEE, Sep 2021.</li>
-                        <li><a href="https://ieeexplore.ieee.org/abstract/document/9076379" target="_blank">Artificial Intelligence Based Comparative Study of Mortality Prediction</a> — ICCMC, IEEE, Mar 2020.</li>
-                        <li><a href="https://link.springer.com/chapter/10.1007/978-981-13-2685-1_22" target="_blank">Enhancement of Security in the Internet of Things (IoT) by Using X.509 Authentication Mechanism</a> — IC3E, Springer, 2018.</li>
-                        <li><a href="http://www.testmagzine.biz/index.php/testmagzine/article/view/1357" target="_blank">Using Social Media for Predictive Data Analytics in Productivity Increasing Decision-Making Process</a> — TEST Engineering &amp; Management, Vol. 82, 2020.</li>
-                        <li>An Enhanced H-H Routing Protocol to Achieve QoS in Wireless Mesh Network — ICTIEM, REC Vellore, 2014.</li>
-                    </ul>
-                </div>
-            </details>
-
-        </div>
-        <div class="pub-grid reveal" style="display:none !important;">
-
-            <!-- BOOK -->
-            <div class="pub-card" data-type="book">
-                <span class="pub-badge pub-badge-book">Book</span>
-                <h4>Convergence of Blockchain, AI and IoT: A Digital Platform</h4>
-                <p class="pub-venue">CRC Press · Taylor &amp; Francis Group</p>
-                <a href="https://www.routledge.com/Convergence-of-Blockchain-AI-and-IoT-A-Digital-Platform/Balamurugan-Poongodi-R-S-Sharma/p/book/9780367495305" target="_blank" class="pub-link">View Book →</a>
-            </div>
-
-            <!-- JOURNALS -->
-            <div class="pub-card" data-type="journal">
-                <span class="pub-badge pub-badge-journal">Journal</span>
-                <h4>An Efficient Brain Tumor Classification And Segmentation Using Deep Learning Features For ML Algorithms</h4>
-                <p class="pub-venue">Journal of Neonatal Surgery · Vol. 14 No. 11S · 2025</p>
-                <a href="https://www.jneonatalsurg.com/index.php/jns/article/view/3003" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="journal">
-                <span class="pub-badge pub-badge-journal">Journal</span>
-                <h4>Human and Object Detection Deep Learning Model Using R-CNN</h4>
-                <p class="pub-venue">JISEM · Vol. 10 No. 30s · 2025</p>
-                <a href="https://jisem-journal.com/index.php/journal/article/view/4897" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="journal">
-                <span class="pub-badge pub-badge-journal">Journal</span>
-                <h4>Secure and Optimized Communication in IoT using DNA Cryptography with X.509 Digital Attributes</h4>
-                <p class="pub-venue">IJETT · Vol. 71(3) · 2023</p>
-                <a href="https://ijettjournal.org/archive/ijett-v71i3p201" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="journal">
-                <span class="pub-badge pub-badge-journal">Journal</span>
-                <h4>Secure Data Transmission in Smart Cities Using DNA Cryptography with LZW Compression Algorithm</h4>
-                <p class="pub-venue">Optoelectronics, Instrumentation &amp; Data Processing · Vol. 60, pp. 156–167 · 2024</p>
-                <a href="https://link.springer.com/article/10.3103/S875669902470016X" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="journal">
-                <span class="pub-badge pub-badge-journal">Journal</span>
-                <h4>Password Attack Resistance using PGRP</h4>
-                <p class="pub-venue">IJCRD · Vol. 3, Issue 2 · 2014</p>
-            </div>
-
-            <div class="pub-card" data-type="journal">
-                <span class="pub-badge pub-badge-journal">Journal</span>
-                <h4>Enhanced Multi Owner Security System in Cloud Environment using Offensive (DFD)</h4>
-                <p class="pub-venue">IJAER · Vol. 10, Issue 38 · 2015</p>
-            </div>
-
-            <!-- BOOK CHAPTERS -->
-            <div class="pub-card" data-type="chapter">
-                <span class="pub-badge pub-badge-chapter">Book Chapter</span>
-                <h4>Taxonomy of Security Attacks in Advances of DNA Computing in Cryptography</h4>
-                <p class="pub-venue">CRC Press / Chapman &amp; Hall · Taylor &amp; Francis</p>
-                <a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781351011419-6/taxonomy-security-attacks-dna-computing-selvaraj-karthikeyan-patan-rizwan-balusamy-balamurugan" target="_blank" class="pub-link">View Chapter →</a>
-            </div>
-
-            <div class="pub-card" data-type="chapter">
-                <span class="pub-badge pub-badge-chapter">Book Chapter</span>
-                <h4>Text Mining</h4>
-                <p class="pub-venue">Natural Language Processing in AI · Apple Academic / CRC Press</p>
-                <a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9780367808495-7/text-mining-karthikeyan-jeevanandam-jotheeswaran-balamurugan-jyotir-moy-chatterjee" target="_blank" class="pub-link">View Chapter →</a>
-            </div>
-
-            <div class="pub-card" data-type="chapter">
-                <span class="pub-badge pub-badge-chapter">Book Chapter</span>
-                <h4>Key Technologies Enabling Big Data Analytics for IoT</h4>
-                <p class="pub-venue">IoT &amp; Big Data Analytics · CRC Press, Taylor &amp; Francis</p>
-                <a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781003036739-9/key-technologies-enabling-big-data-analytics-iot-karthikeyan-balamurugan-balusamy-firoz-khan" target="_blank" class="pub-link">View Chapter →</a>
-            </div>
-
-            <div class="pub-card" data-type="chapter">
-                <span class="pub-badge pub-badge-chapter">Book Chapter</span>
-                <h4>Taxonomy of Big Data and Analytics Solutions for Internet of Things</h4>
-                <p class="pub-venue">IoT &amp; Big Data Analytics · CRC Press, Taylor &amp; Francis</p>
-                <a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781003036739-1/taxonomy-big-data-analytics-solutions-internet-things-karthikeyan-balamurugan-balusamy-poongodi-firoz-khan" target="_blank" class="pub-link">View Chapter →</a>
-            </div>
-
-            <div class="pub-card" data-type="chapter">
-                <span class="pub-badge pub-badge-chapter">Book Chapter</span>
-                <h4>Internet of Things</h4>
-                <p class="pub-venue">Blockchain, IoT &amp; AI Handbook · CRC Press, Taylor &amp; Francis</p>
-                <a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9780429352898-3/internet-things-karthikeyan-balamurugan" target="_blank" class="pub-link">View Chapter →</a>
-            </div>
-
-            <div class="pub-card" data-type="chapter">
-                <span class="pub-badge pub-badge-chapter">Book Chapter</span>
-                <h4>Ransomware Attacks in Cyber Space and Mitigation Strategies</h4>
-                <p class="pub-venue">CRC Press, Taylor &amp; Francis</p>
-                <a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781003558118-4/ransomware-attacks-cyber-space-mitigation-strategies-rajkumar-karthikeyan-kavitha-hariharan" target="_blank" class="pub-link">View Chapter →</a>
-            </div>
-
-            <!-- CONFERENCES -->
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Predicting Cervical Cancer with Swarm Intelligence: CPSO-GA Hybrid Feature Selection Using Stacked Ensemble Learning</h4>
-                <p class="pub-venue">IC3IoT · IEEE · 2024</p>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>E-commerce-based Smart Recommendation System using Element-by-Element Collaborative Filtering</h4>
-                <p class="pub-venue">IC3IoT · IEEE · 2024</p>
-                <a href="https://ieeexplore.ieee.org/document/10550386" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Analysis of Customer Churn for Telecom Company with SMOTE-ENN and Hyperparameter Tuning RandomizedSearchCV</h4>
-                <p class="pub-venue">APCI · IEEE · June 2024</p>
-                <a href="https://ieeexplore.ieee.org/document/10617375" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Academates: Your Path to Personalized Learning</h4>
-                <p class="pub-venue">IC3IoT · IEEE · 2024</p>
-                <a href="https://ieeexplore.ieee.org/document/10550203" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Software Defect Classifier Using Linear Regression And Asymmetric Correlation Heatmap</h4>
-                <p class="pub-venue">APCIT · IEEE · July 2024</p>
-                <a href="https://ieeexplore.ieee.org/document/10673531" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Long Short-Term Memory-Based Next Keyword Prediction</h4>
-                <p class="pub-venue">ESCI · IEEE · Mar 2024</p>
-                <a href="https://ieeexplore.ieee.org/document/10497424" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Intelligent Chatbot for Hospital Recommendation System</h4>
-                <p class="pub-venue">IEEE · Mar 2024</p>
-                <a href="https://ieeexplore.ieee.org/document/10488954" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>One Stop Mentorship (OSM) – A Mobile Application for Career Development</h4>
-                <p class="pub-venue">ICAECC · IEEE · 2023</p>
-                <a href="https://ieeexplore.ieee.org/document/10560135" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Spypark: The Innovative Mobile Application for Online Parking Reservation</h4>
-                <p class="pub-venue">ICAECC · IEEE · 2023</p>
-                <a href="https://ieeexplore.ieee.org/document/10560130" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>An Innovation Development of Decentralized Prove Piercing Data Recuperation Using Improved Red in Mobile Grid Computing</h4>
-                <p class="pub-venue">ICDCECE · IEEE · Apr 2023</p>
-                <a href="https://ieeexplore.ieee.org/document/10150786" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>An Intelligent Innovation of Electrochemical Energy Based Smart Industrial Automation</h4>
-                <p class="pub-venue">ICDCECE · IEEE · Apr 2023</p>
-                <a href="https://ieeexplore.ieee.org/document/10151437" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>An Exploration on Building of Smart Office through AI and IoT</h4>
-                <p class="pub-venue">ICERECT · IEEE · Dec 2022</p>
-                <a href="https://ieeexplore.ieee.org/document/10059619" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>An Investigation on Fat Tree Topology ARP Spoof Detection Using Software Defined Networking</h4>
-                <p class="pub-venue">ICERECT · IEEE · Dec 2022</p>
-                <a href="https://ieeexplore.ieee.org/document/10060657" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Two Dimensional Cellular Automata Encryption Method for Security</h4>
-                <p class="pub-venue">IC3I · IEEE · Dec 2022</p>
-                <a href="https://ieeexplore.ieee.org/document/10072830" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Secured Data Compression and Data Authentication in IoT Networks Using LZW Compression Based X.509 Certification</h4>
-                <p class="pub-venue">ICDSIS · IEEE · 2022</p>
-                <a href="https://ieeexplore.ieee.org/document/9915855" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>JU QUERY – Web App for Community-Based Learning</h4>
-                <p class="pub-venue">ICICICT · IEEE · Oct 2022</p>
-                <a href="https://ieeexplore.ieee.org/document/9917861" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>AI-Based Content Filtering System Using an Age Prediction Algorithm</h4>
-                <p class="pub-venue">ICIRCA · IEEE · Sep 2021</p>
-                <a href="https://ieeexplore.ieee.org/document/9544100" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Artificial Intelligence Based Comparative Study of Mortality Prediction</h4>
-                <p class="pub-venue">ICCMC · IEEE · Mar 2020</p>
-                <a href="https://ieeexplore.ieee.org/abstract/document/9076379" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Enhancement of Security in the Internet of Things (IoT) by Using X.509 Authentication Mechanism</h4>
-                <p class="pub-venue">IC3E · Springer · 2018</p>
-                <a href="https://link.springer.com/chapter/10.1007/978-981-13-2685-1_22" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>Using Social Media for Predictive Data Analytics in Productivity Increasing Decision-Making Process</h4>
-                <p class="pub-venue">TEST Engineering &amp; Management · Vol. 82 · 2020</p>
-                <a href="http://www.testmagzine.biz/index.php/testmagzine/article/view/1357" target="_blank" class="pub-link">View Paper →</a>
-            </div>
-
-            <div class="pub-card" data-type="conference">
-                <span class="pub-badge pub-badge-conference">Conference</span>
-                <h4>An Enhanced H-H Routing Protocol to Achieve QoS in Wireless Mesh Network</h4>
-                <p class="pub-venue">ICTIEM · REC Vellore · 2014</p>
-            </div>
-
+        <!--
+            Accordion sections are rendered by index.js from the Supabase
+            public_records view. Add or edit an entry once in the Vault
+            (vault.html) and it appears here — there is no second copy to keep
+            in sync. Manage content at /vault.html, never in this file.
+        -->
+        <div class="dropdown-container reveal" id="pub-container" data-loading="true">
+            <p class="data-status" id="pub-status">Loading publications…</p>
         </div>
     </section>
-
-
 
     <section id="certifications">
-        <h2 class="reveal">Certifications & Faculty Development</h2>
-        <div class="cert-grid reveal">
-
-            <div class="cert-card">
-                <div class="cert-icon">🏅</div>
-                <div class="cert-body">
-                    <h4>Convergence of AI, IoT, and Cybersecurity in Industry 4.0</h4>
-                    <p>Dept. of CSE – Cybersecurity, School of Computer Science &amp; Engineering, Jain (Deemed-to-be University)</p>
-                </div>
-            </div>
-
-            <div class="cert-card">
-                <div class="cert-icon">🕊️</div>
-                <div class="cert-body">
-                    <h4>SEEK: Self-directed Emotional Learning for Empathy and Kindness</h4>
-                    <p>UNESCO MGIEP – Mahatma Gandhi Institute of Education for Peace and Sustainable Development</p>
-                </div>
-            </div>
-
-            <div class="cert-card">
-                <div class="cert-icon">🥈</div>
-                <div class="cert-body">
-                    <h4>Teaching and Learning in Engineering</h4>
-                    <p>NPTEL Certified · Elite + Silver · 79%</p>
-                </div>
-            </div>
-
-            <div class="cert-card">
-                <div class="cert-icon">🤖</div>
-                <div class="cert-body">
-                    <h4>Artificial Intelligence and Deep Learning</h4>
-                    <p>leadingindia.ai</p>
-                </div>
-            </div>
-
-            <div class="cert-card">
-                <div class="cert-icon">📚</div>
-                <div class="cert-body">
-                    <h4>Digital Learning Platform</h4>
-                    <p>McGraw Hill Education</p>
-                </div>
-            </div>
-
-            <div class="cert-card">
-                <div class="cert-icon">🎯</div>
-                <div class="cert-body">
-                    <h4>Outcome Based Education</h4>
-                    <p>Galgotias University</p>
-                </div>
-            </div>
-
-            <div class="cert-card">
-                <div class="cert-icon">🌿</div>
-                <div class="cert-body">
-                    <h4>Nature Inspired Algorithms for Solving Complex Engineering Problems</h4>
-                    <p>School of Computing Science &amp; Engineering, Galgotias University</p>
-                </div>
-            </div>
-
-            <div class="cert-card">
-                <div class="cert-icon">⚙️</div>
-                <div class="cert-body">
-                    <h4>Engineering Faculty Workshop</h4>
-                    <p>Wipro Mission 10X · Knowledge Institute of Technology</p>
-                </div>
-            </div>
-
-            <div class="cert-card">
-                <div class="cert-icon">💡</div>
-                <div class="cert-body">
-                    <h4>Entrepreneurship</h4>
-                    <p>Technology Business Incubator · Kongu Engineering College</p>
-                </div>
-            </div>
-
-            <div class="cert-card">
-                <div class="cert-icon">☁️</div>
-                <div class="cert-body">
-                    <h4>Salesforce Trailhead</h4>
-                    <p>ICT Academy · PSG Institute of Technology and Applied Research</p>
-                </div>
-            </div>
-
-        </div>
+        <h2 class="reveal">Certifications &amp; Faculty Development</h2>
+        <!-- FDPs, workshops and courses. Rendered from the same records store;
+             manage at /vault.html, never by editing this file. -->
+        <div class="pub-filters reveal" id="cert-filters"></div>
+        <div class="cert-grid reveal" id="cert-container" data-loading="true"></div>
+        <p class="data-status" id="cert-status">Loading certifications…</p>
     </section>
+
 
 <section id="roles-bodies">
         <div class="grid reveal">
 
-            <!-- Roles & Responsibilities -->
+            <!-- Roles & Responsibilities — rendered from records (kind = role) -->
             <div class="card">
                 <h3>Roles & Responsibilities</h3>
-                <ul class="roles-list">
-                    <li>
-                        <span class="role-dot"></span>
-                        Project Coordinator for higher semester students (2021–24)
-                    </li>
-                    <li>
-                        <span class="role-dot"></span>
-                        MIS / IQAC Coordinator, CSSP Department (2022–23)
-                    </li>
-                    <li>
-                        <span class="role-dot"></span>
-                        Content Curation Coordinator (2020–21)
-                    </li>
-                    <li>
-                        <span class="role-dot"></span>
-                        Moodle Coordinator for all schools, Galgotias University
-                    </li>
-                    <li>
-                        <span class="role-dot"></span>
-                        Scintel In-charge — organized events during department Symposium
-                    </li>
-                    <li>
-                        <span class="role-dot"></span>
-                        Training Coordinator — led training programs and placement drives
-                    </li>
-                    <li>
-                        <span class="role-dot"></span>
-                        Mentor for Vefetch Technologies startup
-                    </li>
-                </ul>
+                <ul class="roles-list" id="roles-container" data-loading="true"></ul>
             </div>
 
             <!-- UG Projects -->
@@ -668,48 +239,8 @@
 
     <section id="professional-memberships">
         <h2 class="reveal">Professional Memberships</h2>
-        <div class="prof-body-grid reveal">
-            <div class="prof-body-card">
-                <img src="iste-logo.jpg" alt="ISTE Logo">
-                <div class="prof-body-info">
-                    <h4>ISTE</h4>
-                    <p>Indian Society for Technical Education</p>
-                    <span class="prof-id">LM109489</span>
-                </div>
-            </div>
-            <div class="prof-body-card">
-                <img src="iaeng-logo.png" alt="IAENG Logo">
-                <div class="prof-body-info">
-                    <h4>IAENG</h4>
-                    <p>International Association of Engineers</p>
-                    <span class="prof-id">226980</span>
-                </div>
-            </div>
-            <div class="prof-body-card">
-                <img src="csta-logo.png" alt="CSTA Logo">
-                <div class="prof-body-info">
-                    <h4>CSTA</h4>
-                    <p>Computer Science Teachers Association</p>
-                    <span class="prof-id">56589692</span>
-                </div>
-            </div>
-            <div class="prof-body-card">
-                <img src="icses-logo.png" alt="ICSES Logo">
-                <div class="prof-body-info">
-                    <h4>ICSES</h4>
-                    <p>International Computer Science and Engineering Society</p>
-                    <span class="prof-id">3091</span>
-                </div>
-            </div>
-            <div class="prof-body-card">
-                <img src="iaip-logo.png" alt="IAIP Logo">
-                <div class="prof-body-info">
-                    <h4>IAIP</h4>
-                    <p>International Association of Innovation Professionals</p>
-                    <span class="prof-id">56599797</span>
-                </div>
-            </div>
-        </div>
+        <!-- Rendered from records (kind = membership). Manage at /vault.html -->
+        <div class="prof-body-grid reveal" id="membership-container" data-loading="true"></div>
     </section>
 
     <section id="contact">
@@ -720,7 +251,9 @@
         <p>&copy; 2025 Karthikeyan.S All Rights Reserved.</p>
     </footer>
 
-    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script src="assets/js/index.js"></script>
 </body>
 
 </html>

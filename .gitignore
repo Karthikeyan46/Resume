@@ -1,0 +1,31 @@
+# Local archive of old agent screenshots and scratch files — never deployed
+_archive/
+
+# Agent / tooling leftovers
+.tempmediaStorage/
+.system_generated/
+browser/
+*.resolved
+*.resolved.*
+*.metadata.json
+.claude/
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.code-workspace
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Generated local-preview snapshot (python tools/make-preview-data.py)
+assets/js/preview-data.js
+
+# Scratch notes that are not part of the site
+supabase.docx

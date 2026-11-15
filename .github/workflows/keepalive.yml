@@ -1,0 +1,72 @@
+# ---------------------------------------------------------------------------
+# Keeps the Supabase project awake.
+#
+# Supabase pauses Free-plan projects after ~7 days of low database activity.
+# This workflow runs a real query once a day, which resets that timer whether
+# or not anyone visits the portfolio.
+#
+# Setup (one time): in GitHub -> Settings -> Secrets and variables -> Actions,
+# add two repository secrets:
+#   SUPABASE_URL       https://xxxxxxxxxxxx.supabase.co
+#   SUPABASE_ANON_KEY  the anon / public key
+#
+# If the query ever fails, the job fails and GitHub emails you — which is how
+# you find out something is wrong instead of discovering it months later.
+# ---------------------------------------------------------------------------
+name: Keep Supabase awake
+
+on:
+  schedule:
+    - cron: '17 4 * * *'      # every day at 04:17 UTC (09:47 IST)
+  workflow_dispatch:          # and a "Run workflow" button for manual pings
+
+permissions:
+  contents: write
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Query the database
+        env:
+          URL: ${{ secrets.SUPABASE_URL }}
+          KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$URL" ] || [ -z "$KEY" ]; then
+            echo "::error::SUPABASE_URL or SUPABASE_ANON_KEY secret is missing."
+            exit 1
+          fi
+
+          status=$(curl -sS -o /tmp/body.txt -w '%{http_code}' \
+            "$URL/rest/v1/public_records?select=id&limit=1" \
+            -H "apikey: $KEY" \
+            -H "Authorization: Bearer $KEY")
+
+          echo "HTTP $status"
+          head -c 300 /tmp/body.txt; echo
+
+          if [ "$status" != "200" ]; then
+            echo "::error::Ping failed with HTTP $status. The project may be paused, or the keys may be wrong."
+            exit 1
+          fi
+          echo "Project is awake."
+
+      # GitHub disables scheduled workflows in a repository that has had no
+      # activity for 60 days, and workflow runs do not count as activity.
+      # One commit a month keeps the schedule enabled.
+      - name: Monthly heartbeat commit
+        if: github.event_name == 'schedule'
+        run: |
+          if [ "$(date -u +%d)" != "01" ]; then
+            echo "Not the 1st of the month — nothing to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p .github
+          date -u +"last keepalive heartbeat: %Y-%m-%d" > .github/keepalive-heartbeat.txt
+          git add .github/keepalive-heartbeat.txt
+          git diff --staged --quiet || git commit -m "chore: keepalive heartbeat [skip ci]"
+          git push

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/profile.jpg", "destination": "/assets/img/profile.jpg", "permanent": true },
+    { "source": "/book-cover.jpg", "destination": "/assets/img/book-cover.jpg", "permanent": true },
+    { "source": "/iste-logo.jpg", "destination": "/assets/img/iste-logo.jpg", "permanent": true },
+    { "source": "/iaeng-logo.png", "destination": "/assets/img/iaeng-logo.png", "permanent": true },
+    { "source": "/csta-logo.png", "destination": "/assets/img/csta-logo.png", "permanent": true },
+    { "source": "/icses-logo.png", "destination": "/assets/img/icses-logo.png", "permanent": true },
+    { "source": "/iaip-logo.png", "destination": "/assets/img/iaip-logo.png", "permanent": true },
+    { "source": "/Karthikeyan_S_Resume.docx", "destination": "/assets/docs/Karthikeyan_S_Resume.docx", "permanent": true },
+    { "source": "/resume", "destination": "/assets/docs/Karthikeyan_S_Resume.docx", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/assets/img/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
+    },
+    {
+      "comment": "Always revalidate code, so a deploy is never served stale.",
+      "source": "/assets/(css|js)/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/vault",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    }
+  ]
+}

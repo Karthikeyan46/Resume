@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Vault | Karthikeyan.S</title>
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/vault.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="vault-body">
+
+    <nav id="navbar" class="scrolled">
+        <ul class="nav-links">
+            <li><a href="index.html">← Portfolio</a></li>
+            <li><a href="#" id="nav-vault" class="active">Vault</a></li>
+            <li><a href="http://127.0.0.1:5050" target="_blank" title="Launch Local SQLite Dashboard" style="color: #818cf8; font-weight: 600;">⚡ SQLite DB Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <!-- ================= LOGIN ================= -->
+    <section id="login-view" class="vault-section" hidden>
+        <div class="login-card card">
+            <h2>Private Vault</h2>
+            <p class="muted">Certificates, papers and proofs. Only you can open this.</p>
+
+            <form id="login-form">
+                <label for="email">Email</label>
+                <input id="email" type="email" autocomplete="username" required>
+
+                <label for="password">Password</label>
+                <input id="password" type="password" autocomplete="current-password" required>
+
+                <button type="submit" class="btn btn-primary full" id="login-btn">Sign in</button>
+            </form>
+
+            <button type="button" class="linkish" id="forgot-btn">Forgot password?</button>
+            <p id="login-msg" class="msg" role="status"></p>
+        </div>
+    </section>
+
+    <!-- ================= DASHBOARD ================= -->
+    <section id="app-view" class="vault-section" hidden>
+
+        <header class="vault-head">
+            <div>
+                <h2>My Vault</h2>
+                <p class="muted" id="who"></p>
+            </div>
+            <div class="vault-head-actions">
+                <button class="btn btn-secondary" id="export-btn" title="Download a JSON backup of all records">⬇ Backup</button>
+                <button class="btn btn-secondary" id="logout-btn">Sign out</button>
+            </div>
+        </header>
+
+        <div class="stat-row" id="stat-row"></div>
+
+        <!-- ---------- add / edit form ---------- -->
+        <details class="card form-card" id="form-card">
+            <summary id="form-summary">➕ Add a record</summary>
+
+            <form id="record-form" class="record-form">
+                <input type="hidden" id="rec-id">
+
+                <div class="field span2">
+                    <label for="rec-title">Title *</label>
+                    <input id="rec-title" required placeholder="e.g. FDP on Federated Learning for Intrusion Detection">
+                </div>
+
+                <div class="field">
+                    <label for="rec-kind">Type *</label>
+                    <select id="rec-kind" required>
+                        <optgroup label="Academic activity">
+                            <option value="fdp">FDP</option>
+                            <option value="workshop">Workshop / seminar / webinar</option>
+                            <option value="course">Course / MOOC</option>
+                            <option value="certificate">Certificate (generic)</option>
+                        </optgroup>
+                        <optgroup label="Research output">
+                            <option value="journal">Journal</option>
+                            <option value="conference">Conference</option>
+                            <option value="chapter">Book chapter</option>
+                            <option value="book">Book</option>
+                            <option value="patent">Patent</option>
+                        </optgroup>
+                        <optgroup label="Standing &amp; service">
+                            <option value="membership">Professional membership</option>
+                            <option value="role">Institutional role</option>
+                        </optgroup>
+                        <optgroup label="Private only — never published">
+                            <option value="education">Education certificate</option>
+                            <option value="employment">Employment letter</option>
+                            <option value="teaching">Teaching material</option>
+                            <option value="misc">Miscellaneous</option>
+                            <option value="other">Other / proof</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="rec-icon">Icon</label>
+                    <input id="rec-icon" maxlength="4" placeholder="🏅">
+                </div>
+
+                <div class="field span2">
+                    <label for="rec-venue">Issued by / Venue</label>
+                    <input id="rec-venue" placeholder="e.g. NPTEL · IIT Madras   /   IEEE IC3IoT">
+                </div>
+
+                <div class="field">
+                    <label for="rec-meta">Details</label>
+                    <input id="rec-meta" placeholder="Vol. 71(3) · Elite + Silver 79%">
+                </div>
+
+                <div class="field">
+                    <label for="rec-year">Year</label>
+                    <input id="rec-year" type="number" min="1990" max="2100" placeholder="2026">
+                </div>
+
+                <div class="field span2">
+                    <label for="rec-link">Link (DOI / IEEE / verification URL)</label>
+                    <input id="rec-link" type="url" placeholder="https://">
+                </div>
+
+                <div class="field span2" id="image-field" hidden>
+                    <label for="rec-image">Logo image <span class="muted">(membership cards)</span></label>
+                    <input id="rec-image" placeholder="assets/img/iste-logo.jpg">
+                </div>
+
+                <div class="field span2">
+                    <label for="rec-notes">Private notes <span class="muted">(never shown publicly)</span></label>
+                    <textarea id="rec-notes" rows="2" placeholder="Where you attended, coordinator name, reimbursement claimed…"></textarea>
+                </div>
+
+                <div class="field span2">
+                    <label for="rec-file">Certificate / PDF file</label>
+                    <input id="rec-file" type="file"
+                        accept=".pdf,.png,.jpg,.jpeg,.webp,.docx,.doc,.pptx,.zip">
+                    <p class="muted small" id="file-current"></p>
+                </div>
+
+                <div class="field span2 inline">
+                    <label class="switch">
+                        <input type="checkbox" id="rec-public">
+                        <span>Show on public portfolio</span>
+                    </label>
+                    <span class="muted small" id="public-hint">The file itself always stays private — only the title, venue and link go public.</span>
+                </div>
+
+                <div class="field span2 form-actions">
+                    <button type="submit" class="btn btn-primary" id="save-btn">Save record</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-btn" hidden>Cancel edit</button>
+                    <span class="msg" id="form-msg" role="status"></span>
+                </div>
+            </form>
+        </details>
+
+        <!-- ---------- bulk upload ---------- -->
+        <div class="card drop-card" id="drop-zone">
+            <p><strong>Bulk drop</strong> — drag several certificates here and each one becomes a draft record
+                (filename as the title) that you can tidy up later.</p>
+            <input type="file" id="bulk-input" multiple hidden
+                accept=".pdf,.png,.jpg,.jpeg,.webp,.docx,.doc,.pptx,.zip">
+            <button class="btn btn-secondary" id="bulk-btn">Choose files</button>
+            <p class="msg" id="bulk-msg" role="status"></p>
+        </div>
+
+        <!-- ---------- folder view ---------- -->
+        <div id="folder-view">
+            <div class="folder-head">
+                <h3>Folders</h3>
+                <button class="linkish" id="show-all-btn">Show all records →</button>
+            </div>
+            <div id="folder-groups"></div>
+        </div>
+
+        <!-- ---------- breadcrumb (record view) ---------- -->
+        <nav class="crumbs" id="crumbs" hidden>
+            <button class="linkish" id="back-btn">← Folders</button>
+            <span class="crumb-sep">/</span>
+            <span id="crumb-current"></span>
+        </nav>
+
+        <!-- ---------- toolbar ---------- -->
+        <div class="toolbar" id="toolbar" hidden>
+            <input id="search" type="search" placeholder="Search title, venue, notes…">
+            <select id="filter-kind">
+                <option value="all">All types</option>
+                <optgroup label="Academic activity">
+                    <option value="fdp">FDP</option>
+                    <option value="workshop">Workshops / seminars</option>
+                    <option value="course">Courses / MOOCs</option>
+                    <option value="certificate">Certificates (generic)</option>
+                </optgroup>
+                <optgroup label="Research output">
+                    <option value="journal">Journals</option>
+                    <option value="conference">Conferences</option>
+                    <option value="chapter">Book chapters</option>
+                    <option value="book">Books</option>
+                    <option value="patent">Patents</option>
+                </optgroup>
+                <optgroup label="Standing &amp; service">
+                    <option value="membership">Memberships</option>
+                    <option value="role">Institutional roles</option>
+                </optgroup>
+                <optgroup label="Private only">
+                    <option value="education">Education certificates</option>
+                    <option value="employment">Employment letters</option>
+                    <option value="teaching">Teaching material</option>
+                    <option value="misc">Miscellaneous</option>
+                    <option value="other">Other</option>
+                </optgroup>
+            </select>
+            <select id="filter-file">
+                <option value="all">File: any</option>
+                <option value="yes">Has file</option>
+                <option value="no">Missing file</option>
+            </select>
+            <select id="filter-vis">
+                <option value="all">Visibility: any</option>
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+            </select>
+        </div>
+
+        <div id="record-list" class="record-list" hidden></div>
+        <p id="empty-msg" class="muted" hidden>Nothing here yet.</p>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script src="assets/js/vault.js"></script>
+</body>
+
+</html>

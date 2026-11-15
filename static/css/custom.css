@@ -1,0 +1,101 @@
+/* Custom Styles for Academic Portfolio & Certificate Vault */
+
+/* Smooth scroll & base transitions */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.7);
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Category Pill active animation */
+.category-pill {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.category-pill:hover:not(.active) {
+  background-color: rgba(99, 102, 241, 0.1);
+  color: #4f46e5;
+}
+.dark .category-pill:hover:not(.active) {
+  background-color: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+}
+
+/* Card hover lift effect */
+.credential-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.credential-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+.dark .credential-card:hover {
+  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+}
+
+/* Dropzone dragover state */
+#dropZone.dragover {
+  border-color: #6366f1 !important;
+  background-color: rgba(99, 102, 241, 0.08) !important;
+}
+
+/* Toast animation */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.toast-animate {
+  animation: slideInUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Badges styling */
+.badge-school { background-color: #fef3c7; color: #92400e; border-color: #fde68a; }
+.badge-college { background-color: #dbeafe; color: #1e40af; border-color: #bfdbfe; }
+.badge-journal { background-color: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+.badge-conference { background-color: #e0e7ff; color: #3730a3; border-color: #c7d2fe; }
+.badge-fdp { background-color: #ccfbf1; color: #115e59; border-color: #99f6e4; }
+.badge-patent { background-color: #ffedd5; color: #9a3412; border-color: #fed7aa; }
+.badge-book_chapter { background-color: #ffe4e6; color: #9f1239; border-color: #fecdd3; }
+.badge-book { background-color: #fee2e2; color: #991b1b; border-color: #fecaca; }
+.badge-course { background-color: #cffafe; color: #155e75; border-color: #a5f3fc; }
+.badge-membership { background-color: #f3e8ff; color: #6b21a8; border-color: #e9d5ff; }
+.badge-role { background-color: #e0f2fe; color: #075985; border-color: #bae6fd; }
+
+.dark .badge-school { background-color: #451a03; color: #fde68a; border-color: #78350f; }
+.dark .badge-college { background-color: #172554; color: #bfdbfe; border-color: #1e3a8a; }
+.dark .badge-journal { background-color: #2e1065; color: #ddd6fe; border-color: #4c1d95; }
+.dark .badge-conference { background-color: #1e1b4b; color: #c7d2fe; border-color: #312e81; }
+.dark .badge-fdp { background-color: #042f2e; color: #99f6e4; border-color: #134e4a; }
+.dark .badge-patent { background-color: #431407; color: #fed7aa; border-color: #7c2d12; }
+.dark .badge-book_chapter { background-color: #4c0519; color: #fecdd3; border-color: #881337; }
+.dark .badge-book { background-color: #450a0a; color: #fecaca; border-color: #7f1d1d; }
+.dark .badge-course { background-color: #083344; color: #a5f3fc; border-color: #164e63; }
+.dark .badge-membership { background-color: #3b0764; color: #e9d5ff; border-color: #581c87; }
+.dark .badge-role { background-color: #082f49; color: #bae6fd; border-color: #0369a1; }

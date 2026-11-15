@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curriculum Vitae & Academic Portfolio | Prof. Karthikeyan S.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    @media print {
+      body { background-color: white !important; color: black !important; font-size: 11pt; }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; }
+      .cv-container { box-shadow: none !important; border: none !important; max-width: 100% !important; padding: 0 !important; }
+      a { text-decoration: none !important; color: black !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-['Plus_Jakarta_Sans'] py-8 px-4 sm:px-6">
+  
+  <!-- Printable Top Bar -->
+  <div class="max-w-4xl mx-auto mb-6 flex items-center justify-between no-print">
+    <a href="/" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200 transition">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      <span>Back to Vault Dashboard</span>
+    </a>
+    
+    <div class="flex items-center gap-3">
+      <a href="/api/export/csv" class="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200 hover:bg-slate-50 transition">
+        <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-600"></i>
+        <span>Export CSV</span>
+      </a>
+      <button onclick="window.print()" class="inline-flex items-center gap-2 text-sm font-semibold bg-indigo-600 text-white px-5 py-2 rounded-xl shadow-md hover:bg-indigo-500 transition">
+        <i data-lucide="printer" class="w-4 h-4"></i>
+        <span>Print / Save as PDF</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- CV Paper Sheet -->
+  <div class="cv-container max-w-4xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-200 p-8 sm:p-12 space-y-8">
+    
+    <!-- Header -->
+    <header class="border-b border-slate-200 pb-6">
+      <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">KARTHIKEYAN S.</h1>
+          <p class="text-base font-semibold text-indigo-700 mt-1">Assistant Professor | Department of Computer Science & Engineering</p>
+          <p class="text-sm text-slate-500 mt-0.5">Specialization: DNA Cryptography, IoT Security, Cloud Security & Deep Learning</p>
+        </div>
+        <div class="text-xs text-slate-600 space-y-1 sm:text-right">
+          <div><i data-lucide="mail" class="w-3.5 h-3.5 inline mr-1 text-slate-400"></i> link2karthikcse@gmail.com</div>
+          <div><i data-lucide="phone" class="w-3.5 h-3.5 inline mr-1 text-slate-400"></i> +91-9543277017</div>
+          <div><span class="font-bold text-slate-700">Scopus Author ID:</span> 58100582500</div>
+          <div><span class="font-bold text-slate-700">ORCID:</span> 0000-0002-7473-9217</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 1. Educational Qualifications -->
+    <section>
+      <h2 class="text-lg font-bold text-slate-900 border-b-2 border-indigo-600 pb-1 mb-4 uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="graduation-cap" class="w-5 h-5 text-indigo-600"></i>
+        Educational Qualifications
+      </h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm border-collapse border border-slate-200">
+          <thead class="bg-slate-50 text-xs font-bold text-slate-600 uppercase border-b border-slate-200">
+            <tr>
+              <th class="p-2.5 border border-slate-200">Level / Degree</th>
+              <th class="p-2.5 border border-slate-200">Institution / University</th>
+              <th class="p-2.5 border border-slate-200">Year</th>
+              <th class="p-2.5 border border-slate-200">Score / Division</th>
+            </tr>
+          </thead>
+          <tbody id="eduTableBody" class="divide-y divide-slate-200 text-xs sm:text-sm">
+            <!-- Dynamically populated from SQLite -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2. Teaching & Academic Experience -->
+    <section>
+      <h2 class="text-lg font-bold text-slate-900 border-b-2 border-indigo-600 pb-1 mb-4 uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="briefcase" class="w-5 h-5 text-indigo-600"></i>
+        Academic & Teaching Experience (10+ Years)
+      </h2>
+      <div class="space-y-3 text-sm">
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="font-bold text-slate-900">Assistant Professor</span> — Jain (Deemed-to-be University), Bangalore
+            <div class="text-xs text-slate-500">School of Computer Science & Engineering (Cybersecurity & CSSP)</div>
+          </div>
+          <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">27.07.2020 – Present</span>
+        </div>
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="font-bold text-slate-900">Assistant Professor</span> — Galgotias University, Greater Noida
+            <div class="text-xs text-slate-500">School of Computing Science & Engineering</div>
+          </div>
+          <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">01.09.2017 – 12.03.2020</span>
+        </div>
+        <div class="flex justify-between items-start">
+          <div>
+            <span class="font-bold text-slate-900">Assistant Professor</span> — Knowledge Institute of Technology, Salem
+            <div class="text-xs text-slate-500">Department of Computer Science & Engineering</div>
+          </div>
+          <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">03.06.2015 – 25.08.2017</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Patents & Intellectual Property -->
+    <section id="sectionPatents">
+      <h2 class="text-lg font-bold text-slate-900 border-b-2 border-indigo-600 pb-1 mb-4 uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="shield-check" class="w-5 h-5 text-indigo-600"></i>
+        Patents & Intellectual Property Rights
+      </h2>
+      <ol id="patentsList" class="list-decimal list-inside space-y-2 text-sm text-slate-700"></ol>
+    </section>
+
+    <!-- 4. Authored Books & Book Chapters -->
+    <section id="sectionBooks">
+      <h2 class="text-lg font-bold text-slate-900 border-b-2 border-indigo-600 pb-1 mb-4 uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="book" class="w-5 h-5 text-indigo-600"></i>
+        Authored Books & Book Chapters (CRC Press / Taylor & Francis)
+      </h2>
+      <ol id="booksList" class="list-decimal list-inside space-y-2.5 text-sm text-slate-700"></ol>
+    </section>
+
+    <!-- 5. Journal Publications (Scopus / SCI) -->
+    <section id="sectionJournals">
+      <h2 class="text-lg font-bold text-slate-900 border-b-2 border-indigo-600 pb-1 mb-4 uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="book-open" class="w-5 h-5 text-indigo-600"></i>
+        International Refereed Journal Publications (Scopus / SCI Indexed)
+      </h2>
+      <ol id="journalsList" class="list-decimal list-inside space-y-2.5 text-sm text-slate-700"></ol>
+    </section>
+
+    <!-- 6. Conference Proceedings (IEEE / Springer) -->
+    <section id="sectionConferences">
+      <h2 class="text-lg font-bold text-slate-900 border-b-2 border-indigo-600 pb-1 mb-4 uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="users" class="w-5 h-5 text-indigo-600"></i>
+        International & National Conference Proceedings
+      </h2>
+      <ol id="conferencesList" class="list-decimal list-inside space-y-2 text-sm text-slate-700"></ol>
+    </section>
+
+    <!-- 7. Faculty Development Programs & Certifications -->
+    <section id="sectionFDP">
+      <h2 class="text-lg font-bold text-slate-900 border-b-2 border-indigo-600 pb-1 mb-4 uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="presentation" class="w-5 h-5 text-indigo-600"></i>
+        Faculty Development Programs (FDP), Workshops & SWAYAM/NPTEL
+      </h2>
+      <ul id="fdpList" class="list-disc list-inside space-y-1.5 text-sm text-slate-700"></ul>
+    </section>
+
+    <!-- 8. Professional Memberships -->
+    <section id="sectionMemberships">
+      <h2 class="text-lg font-bold text-slate-900 border-b-2 border-indigo-600 pb-1 mb-4 uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="id-card" class="w-5 h-5 text-indigo-600"></i>
+        Professional Society Memberships
+      </h2>
+      <div id="membershipsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-700"></div>
+    </section>
+
+    <!-- 9. Institutional Responsibilities -->
+    <section id="sectionRoles">
+      <h2 class="text-lg font-bold text-slate-900 border-b-2 border-indigo-600 pb-1 mb-4 uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="award" class="w-5 h-5 text-indigo-600"></i>
+        Key Institutional Roles & Academic Administration
+      </h2>
+      <ul id="rolesList" class="list-disc list-inside space-y-1 text-sm text-slate-700"></ul>
+    </section>
+
+  </div>
+
+  <script>
+    async function loadCVData() {
+      try {
+        const res = await fetch('/api/items');
+        const json = await res.json();
+        const items = json.data || [];
+
+        // Education
+        const edu = items.filter(i => i.category === 'school' || i.category === 'college')
+          .sort((a,b) => (b.year || 0) - (a.year || 0));
+        const eduBody = document.getElementById('eduTableBody');
+        eduBody.innerHTML = edu.map(e => `
+          <tr class="hover:bg-slate-50">
+            <td class="p-2.5 border border-slate-200 font-semibold text-slate-900">${e.title}</td>
+            <td class="p-2.5 border border-slate-200 text-slate-700">${e.issuer_or_org || '-'}</td>
+            <td class="p-2.5 border border-slate-200 text-slate-600">${e.year || '-'}</td>
+            <td class="p-2.5 border border-slate-200 font-bold text-indigo-700">${e.score_or_grade || '-'}</td>
+          </tr>
+        `).join('');
+
+        // Patents
+        const patents = items.filter(i => i.category === 'patent');
+        document.getElementById('patentsList').innerHTML = patents.map(p => `
+          <li>
+            <span class="font-bold">${p.title}</span>, ${p.issuer_or_org || 'Patent Office'}, ${p.year || ''}. 
+            <span class="text-xs text-indigo-600 font-semibold">(${p.score_or_grade || 'Published'})</span>
+          </li>
+        `).join('');
+
+        // Books & Chapters
+        const books = items.filter(i => i.category === 'book' || i.category === 'book_chapter');
+        document.getElementById('booksList').innerHTML = books.map(b => `
+          <li>
+            <span class="font-bold">${b.title}</span>, in <em>${b.issuer_or_org || ''}</em>, ${b.year || ''}.
+            ${b.identifier ? `<span class="text-xs font-mono text-slate-500">[${b.identifier}]</span>` : ''}
+            ${b.url ? `<a href="${b.url}" target="_blank" class="text-xs text-indigo-600 underline ml-1">[Link]</a>` : ''}
+          </li>
+        `).join('');
+
+        // Journals
+        const journals = items.filter(i => i.category === 'journal');
+        document.getElementById('journalsList').innerHTML = journals.map(j => `
+          <li>
+            <span class="font-bold">"${j.title}"</span>, <em>${j.issuer_or_org || ''}</em>, ${j.year || ''}.
+            ${j.identifier ? `<span class="text-xs font-mono text-slate-500">[${j.identifier}]</span>` : ''}
+            ${j.score_or_grade ? `<span class="text-xs font-semibold text-emerald-600">(${j.score_or_grade})</span>` : ''}
+            ${j.url ? `<a href="${j.url}" target="_blank" class="text-xs text-indigo-600 underline ml-1">[DOI / Link]</a>` : ''}
+          </li>
+        `).join('');
+
+        // Conferences
+        const conferences = items.filter(i => i.category === 'conference');
+        document.getElementById('conferencesList').innerHTML = conferences.map(c => `
+          <li>
+            <span class="font-bold">"${c.title}"</span>, in Proceedings of <em>${c.issuer_or_org || ''}</em>, ${c.year || ''}.
+            ${c.url ? `<a href="${c.url}" target="_blank" class="text-xs text-indigo-600 underline ml-1">[IEEE Xplore]</a>` : ''}
+          </li>
+        `).join('');
+
+        // FDP & Courses
+        const fdps = items.filter(i => i.category === 'fdp' || i.category === 'course');
+        document.getElementById('fdpList').innerHTML = fdps.map(f => `
+          <li>
+            <span class="font-semibold text-slate-800">${f.title}</span> — ${f.issuer_or_org || ''}
+            ${f.score_or_grade ? `<span class="text-xs font-semibold text-indigo-600">(${f.score_or_grade})</span>` : ''}
+            ${f.year ? `<span class="text-xs text-slate-500">, ${f.year}</span>` : ''}
+          </li>
+        `).join('');
+
+        // Memberships
+        const memberships = items.filter(i => i.category === 'membership');
+        document.getElementById('membershipsGrid').innerHTML = memberships.map(m => `
+          <div class="p-2 rounded-lg bg-slate-50 border border-slate-200">
+            <span class="font-bold text-slate-900">${m.title}</span>
+            <div class="text-xs text-slate-500">${m.issuer_or_org || ''} ${m.identifier ? `• ID: ${m.identifier}` : ''}</div>
+          </div>
+        `).join('');
+
+        // Roles
+        const roles = items.filter(i => i.category === 'role');
+        document.getElementById('rolesList').innerHTML = roles.map(r => `
+          <li>
+            <span class="font-semibold text-slate-800">${r.title}</span>
+            ${r.issuer_or_org ? `— ${r.issuer_or_org}` : ''}
+            ${r.score_or_grade ? `(${r.score_or_grade})` : ''}
+          </li>
+        `).join('');
+
+        lucide.createIcons();
+      } catch (err) {
+        console.error('Error loading CV data:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadCVData);
+  </script>
+</body>
+</html>
