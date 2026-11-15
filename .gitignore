@@ -24,8 +24,10 @@ __pycache__/
 *.py[cod]
 *.pyc
 
-# Generated local-preview snapshot (python tools/make-preview-data.py)
-assets/js/preview-data.js
 
-# Scratch notes that are not part of the site
+
+# Scratch notes and recovery secrets that are not part of the site
 supabase.docx
+*recovery-codes*
+*.txt
+!requirements.txt

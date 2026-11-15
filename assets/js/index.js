@@ -300,13 +300,11 @@ document.querySelectorAll('.pub-filter-btn').forEach(btn => {
         }
 
         if (!window.SUPABASE_READY || !window.SUPABASE_READY() || !window.supabase) {
-            if (IS_LOCAL) {
-                const preview = await loadPreviewData();
-                if (preview && preview.length) {
-                    renderAll(preview);
-                    previewBanner();
-                    return;
-                }
+            const preview = await loadPreviewData();
+            if (preview && preview.length) {
+                renderAll(preview);
+                if (IS_LOCAL) previewBanner();
+                return;
             }
             if (!cached) failed('Content store not configured yet — see SETUP.md.');
             return;
@@ -317,13 +315,26 @@ document.querySelectorAll('.pub-filter-btn').forEach(btn => {
             const db = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
             const { data, error } = await db.from('public_records').select('*');
             if (error) throw error;
-            if (!data) throw new Error('empty response');
-
-            renderAll(data);
-            localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), records: data }));
+            if (!data || !data.length) {
+                const preview = await loadPreviewData();
+                if (preview && preview.length) {
+                    renderAll(preview);
+                    return;
+                }
+            } else {
+                renderAll(data);
+                localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), records: data }));
+            }
         } catch (err) {
             console.error('records fetch failed:', err);
-            if (!cached) failed('Content is temporarily unavailable. Please try again shortly.');
+            if (!cached) {
+                const preview = await loadPreviewData();
+                if (preview && preview.length) {
+                    renderAll(preview);
+                    return;
+                }
+                failed('Content is temporarily unavailable. Please try again shortly.');
+            }
         }
     }
 
