@@ -120,14 +120,15 @@
         });
     }
 
-    // Scroll reveal observer
+    // Scroll reveal observer — pre-triggers smoothly before entering viewport
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.02, rootMargin: '0px 0px 100px 0px' });
 
     function initReveal() {
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
