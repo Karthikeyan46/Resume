@@ -1,357 +1,333 @@
-// Sticky Navbar effect
-window.addEventListener('scroll', () => {
-    const nav = document.getElementById('navbar');
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
-});
-
-// Scroll Reveal Animation
-const observerOptions = {
-    threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-// Count-up animation for pub stats
-function animateCount(el, target, suffix) {
-    let start = 0;
-    const duration = 1500;
-    const step = 16;
-    const increment = target / (duration / step);
-
-    const timer = setInterval(() => {
-        start += increment;
-        if (start >= target) {
-            start = target;
-            clearInterval(timer);
-        }
-        el.textContent = Math.floor(start) + suffix;
-    }, step);
-}
-
-// Called after the stats bar has been filled in from the records store
-function initStatsCounter() {
-    const statsEl = document.querySelector('.pub-stats');
-    if (!statsEl || statsEl.dataset.counted) return;
-    statsEl.dataset.counted = '1';
-
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                statsEl.querySelectorAll('.pub-stat-num').forEach(el => {
-                    const raw = el.textContent.trim();
-                    const suffix = raw.includes('+') ? '+' : '';
-                    const target = parseInt(raw.replace('+', ''), 10);
-                    el.textContent = '0' + suffix;
-                    animateCount(el, target, suffix);
-                });
-                statsObserver.disconnect();
-            }
-        });
-    }, { threshold: 0.3 });
-
-    statsObserver.observe(statsEl);
-}
-
-// Publication filter tabs → show/hide accordion sections
-document.querySelectorAll('.pub-filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.pub-filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.dropdown-item[data-section]').forEach(item => {
-            if (filter === 'all' || item.dataset.section === filter) {
-                item.style.display = '';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    });
-});
-
 /* ===========================================================================
-   Public content — Publications + Certifications
-   ---------------------------------------------------------------------------
-   Both sections are rendered from ONE source: the `public_records` view in
-   Supabase, which exposes only the rows you marked public in the vault.
-   Nothing about publications or certificates is hard-coded in index.html any
-   more, so there is no second list to keep in sync.
-
-   The last successful fetch is cached in localStorage, so a returning visitor
-   still sees content if the database is briefly unreachable.
+   Academic Portfolio Script — Inspired by aanchalvij.com
+   - Editorial scholarly presentation
+   - Real-time client-side publication filtering & live search
+   - Seamless data sync from Supabase with instant fallback to bundled preview data
    =========================================================================== */
+
 (function () {
     'use strict';
 
-    // If the console does not show this line, the browser is serving a cached
-    // copy of index.js — hard-refresh with Ctrl+Shift+R.
-    console.log('index.js build: data-driven 2026-08-05 | Supabase configured:',
-        !!(window.SUPABASE_READY && window.SUPABASE_READY()));
+    // Sticky Navbar shadow on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+            navbar && navbar.classList.add('scrolled');
+        } else {
+            navbar && navbar.classList.remove('scrolled');
+        }
+    }, { passive: true });
 
-    const CACHE_KEY = 'portfolio_records_v2';
+    // Mobile nav toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+        // Close menu on link click
+        navMenu.querySelectorAll('.nav-links a').forEach(a => {
+            a.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+            });
+        });
+    }
 
-    const PUB_SECTIONS = [
-        { kind: 'book', title: 'Book Published', label: 'Book' },
-        { kind: 'journal', title: 'Journals', label: 'Journals' },
-        { kind: 'patent', title: 'Patent', label: 'Patent' },
-        { kind: 'chapter', title: 'Book Chapters', label: 'Book Chapters' },
-        { kind: 'conference', title: 'International Conferences', label: 'Conferences' }
-    ];
+    // Scroll-reveal animations
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
 
-    // Academic-activity types, shown together in the Certifications grid.
-    // Order here is the order of the filter pills above the grid.
-    const CERT_KINDS = [
-        { kind: 'fdp', label: 'FDP', tag: 'FDP' },
-        { kind: 'workshop', label: 'Workshops', tag: 'Workshop' },
-        { kind: 'course', label: 'Courses', tag: 'Course' },
-        { kind: 'certificate', label: 'Other', tag: 'Certificate' }
-    ];
+    function initReveal() {
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    }
+    initReveal();
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#' || targetId === '#!') return;
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                const navH = navbar ? navbar.offsetHeight : 68;
+                const top = target.getBoundingClientRect().top + window.pageYOffset - navH;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Floating back to top button
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTopBtn.style.opacity = '1';
+                backToTopBtn.style.pointerEvents = 'auto';
+            } else {
+                backToTopBtn.style.opacity = '0';
+                backToTopBtn.style.pointerEvents = 'none';
+            }
+        }, { passive: true });
+
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    /* =======================================================================
+       Data Layer — Supabase + Bundled Preview Records Fallback
+       ======================================================================= */
+    const CACHE_KEY = 'portfolio_records_v3';
+    let ALL_RECORDS = [];
+    let currentPubFilter = 'all';
+    let currentSearchTerm = '';
 
     const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => (
         { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
     ));
 
-    function bySort(a, b) {
-        return (a.sort_order || 0) - (b.sort_order || 0);
+    const PUB_KINDS = ['journal', 'conference', 'chapter', 'book', 'patent'];
+    const KIND_LABELS = {
+        journal: 'Journal',
+        conference: 'Conference',
+        chapter: 'Book Chapter',
+        book: 'Book',
+        patent: 'Patent',
+        fdp: 'Faculty Development',
+        workshop: 'Workshop',
+        course: 'Certification Course',
+        membership: 'Membership',
+        role: 'Role'
+    };
+
+    function highlightAuthor(text) {
+        if (!text) return '<strong>Karthikeyan S.</strong>';
+        return text.replace(/(Karthikeyan(\s+S\.?|\s+Selvaraj)?|Selvaraj\s+Karthikeyan)/gi, '<strong class="author-highlight">$1</strong>');
     }
 
-    function renderPublications(records) {
-        const box = document.getElementById('pub-container');
-        if (!box) return;
+    /* ------------------------------------------------ Publications Rendering */
+    function renderPublications() {
+        const list = document.getElementById('pub-list');
+        const countBox = document.getElementById('pub-count-label');
+        if (!list) return;
 
-        let html = '';
-        PUB_SECTIONS.forEach(sec => {
-            const items = records.filter(r => r.kind === sec.kind).sort(bySort);
-            if (!items.length) return;
+        // Filter by kind
+        let items = ALL_RECORDS.filter(r => PUB_KINDS.includes(r.kind));
 
-            const lis = items.map(r => {
-                const tail = [r.venue, r.meta].filter(Boolean).join(', ');
-                const titleHtml = r.link
-                    ? `<a href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.title)}</a>`
-                    : esc(r.title);
-                return `<li>${titleHtml}${tail ? ' — ' + esc(tail) + '.' : ''}</li>`;
-            }).join('');
-
-            html += `<details class="dropdown-item" data-section="${sec.kind}">` +
-                `<summary>${esc(sec.title)}</summary>` +
-                `<div class="dropdown-content"><ul>${lis}</ul></div></details>`;
-        });
-
-        box.innerHTML = html || '<p class="data-status">No publications listed yet.</p>';
-        box.removeAttribute('data-loading');
-
-        // re-apply whichever filter tab is currently active
-        const active = document.querySelector('.pub-filter-btn.active');
-        if (active) active.click();
-    }
-
-    function renderStats(records) {
-        const bar = document.getElementById('pub-stats');
-        if (!bar) return;
-        bar.innerHTML = PUB_SECTIONS
-            .map(sec => ({ sec, n: records.filter(r => r.kind === sec.kind).length }))
-            .filter(x => x.n > 0)
-            .sort((a, b) => b.n - a.n)
-            .map(x => `<div class="pub-stat"><span class="pub-stat-num">${x.n}</span>` +
-                `<span class="pub-stat-label">${esc(x.sec.label)}</span></div>`)
-            .join('');
-        initStatsCounter();
-    }
-
-    function renderCertifications(records) {
-        const box = document.getElementById('cert-container');
-        const pills = document.getElementById('cert-filters');
-        const status = document.getElementById('cert-status');
-        if (!box) return;
-
-        const kinds = CERT_KINDS.map(c => c.kind);
-        const items = records.filter(r => kinds.includes(r.kind))
-            .sort((a, b) => kinds.indexOf(a.kind) - kinds.indexOf(b.kind) || bySort(a, b));
-
-        box.innerHTML = items.map(r => {
-            const tag = (CERT_KINDS.find(c => c.kind === r.kind) || {}).tag || '';
-            return '<div class="cert-card" data-kind="' + esc(r.kind) + '">' +
-                `<div class="cert-icon">${esc(r.icon || '🏅')}</div>` +
-                '<div class="cert-body">' +
-                `<span class="cert-tag cert-tag--${esc(r.kind)}">${esc(tag)}</span>` +
-                `<h4>${esc(r.title)}</h4>` +
-                `<p>${esc([r.venue, r.meta, r.year].filter(Boolean).join(' · '))}</p>` +
-                (r.link ? `<a href="${esc(r.link)}" target="_blank" rel="noopener" class="pub-link">Verify →</a>` : '') +
-                '</div></div>';
-        }).join('');
-        box.removeAttribute('data-loading');
-        if (status) status.remove();
-
-        // filter pills — only for the types that actually have entries
-        if (pills) {
-            const present = CERT_KINDS.filter(c => items.some(r => r.kind === c.kind));
-            pills.innerHTML = present.length > 1
-                ? '<button class="pub-filter-btn active" data-cert-filter="all">All</button>' +
-                present.map(c => `<button class="pub-filter-btn" data-cert-filter="${c.kind}">${esc(c.label)}</button>`).join('')
-                : '';
-        }
-    }
-
-    // one delegated listener, survives every re-render
-    document.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-cert-filter]');
-        if (!btn) return;
-        btn.parentElement.querySelectorAll('.pub-filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const f = btn.dataset.certFilter;
-        document.querySelectorAll('#cert-container .cert-card').forEach(card => {
-            card.style.display = (f === 'all' || card.dataset.kind === f) ? '' : 'none';
-        });
-    });
-
-    function renderMemberships(records) {
-        const box = document.getElementById('membership-container');
-        if (!box) return;
-        const items = records.filter(r => r.kind === 'membership').sort(bySort);
-        if (!items.length) { box.closest('section').hidden = true; return; }
-        box.closest('section').hidden = false;
-
-        box.innerHTML = items.map(r => (
-            '<div class="prof-body-card">' +
-            (r.image_url ? `<img src="${esc(r.image_url)}" alt="${esc(r.title)} Logo" loading="lazy">` : '') +
-            '<div class="prof-body-info">' +
-            `<h4>${esc(r.title)}</h4>` +
-            `<p>${esc(r.venue || '')}</p>` +
-            (r.meta ? `<span class="prof-id">${esc(r.meta)}</span>` : '') +
-            '</div></div>'
-        )).join('');
-        box.removeAttribute('data-loading');
-    }
-
-    function renderRoles(records) {
-        const box = document.getElementById('roles-container');
-        if (!box) return;
-        const items = records.filter(r => r.kind === 'role').sort(bySort);
-        if (!items.length) { box.closest('.card').hidden = true; return; }
-        box.closest('.card').hidden = false;
-
-        box.innerHTML = items.map(r => (
-            '<li><span class="role-dot"></span>' +
-            `<span>${esc(r.title)}${r.meta ? ' (' + esc(r.meta) + ')' : ''}</span></li>`
-        )).join('');
-        box.removeAttribute('data-loading');
-    }
-
-    function renderAll(records) {
-        renderStats(records);
-        renderPublications(records);
-        renderCertifications(records);
-        renderMemberships(records);
-        renderRoles(records);
-        // let the scroll-reveal observer pick up freshly injected blocks
-        document.querySelectorAll('.reveal:not(.active)').forEach(el => observer.observe(el));
-    }
-
-    function failed(message) {
-        const pubStatus = document.getElementById('pub-status');
-        const certStatus = document.getElementById('cert-status');
-        if (pubStatus) pubStatus.textContent = message;
-        if (certStatus) certStatus.textContent = message;
-    }
-
-    // Local preview: when the site is served from localhost without a Supabase
-    // project connected, fall back to the generated seed snapshot so the page
-    // is not blank. Never runs on the deployed site.
-    const IS_LOCAL = ['localhost', '127.0.0.1', '0.0.0.0', '::1', ''].includes(location.hostname);
-
-    function loadPreviewData() {
-        return new Promise(resolve => {
-            if (window.PREVIEW_RECORDS) return resolve(window.PREVIEW_RECORDS);
-            const s = document.createElement('script');
-            s.src = 'assets/js/preview-data.js';
-            s.onload = () => resolve(window.PREVIEW_RECORDS || null);
-            s.onerror = () => resolve(null);
-            document.head.appendChild(s);
-        });
-    }
-
-    function previewBanner() {
-        if (document.getElementById('preview-banner')) return;
-        const bar = document.createElement('div');
-        bar.id = 'preview-banner';
-        bar.textContent = 'Local preview — showing seed data. Connect Supabase (SETUP.md) for live content.';
-        document.body.appendChild(bar);
-    }
-
-    async function load() {
-        // 1. paint from cache instantly if we have one
-        let cached = null;
-        try {
-            cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
-        } catch (e) { /* ignore corrupt cache */ }
-        if (cached && Array.isArray(cached.records) && cached.records.length) {
-            renderAll(cached.records);
+        if (currentPubFilter !== 'all') {
+            items = items.filter(r => r.kind === currentPubFilter);
         }
 
-        if (!window.SUPABASE_READY || !window.SUPABASE_READY() || !window.supabase) {
-            const preview = await loadPreviewData();
-            if (preview && preview.length) {
-                renderAll(preview);
-                if (IS_LOCAL) previewBanner();
-                return;
-            }
-            if (!cached) failed('Content store not configured yet — see SETUP.md.');
+        // Filter by search query
+        if (currentSearchTerm.trim()) {
+            const q = currentSearchTerm.toLowerCase();
+            items = items.filter(r => 
+                (r.title && r.title.toLowerCase().includes(q)) ||
+                (r.venue && r.venue.toLowerCase().includes(q)) ||
+                (r.meta && r.meta.toLowerCase().includes(q)) ||
+                (r.year && String(r.year).includes(q))
+            );
+        }
+
+        // Sort by year descending, then sort_order
+        items.sort((a, b) => (b.year || 0) - (a.year || 0) || (a.sort_order || 0) - (b.sort_order || 0));
+
+        if (countBox) {
+            countBox.textContent = `Showing ${items.length} of ${ALL_RECORDS.filter(r => PUB_KINDS.includes(r.kind)).length} scholarly works`;
+        }
+
+        if (!items.length) {
+            list.innerHTML = `
+                <div style="padding: 3rem 2rem; text-align: center; color: var(--muted);">
+                    <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">No publications matching "<strong>${esc(currentSearchTerm)}</strong>".</p>
+                    <button class="btn btn-secondary btn-sm" id="reset-pub-search" style="margin-top: 0.5rem;">Clear search</button>
+                </div>`;
+            const resetBtn = document.getElementById('reset-pub-search');
+            if (resetBtn) resetBtn.addEventListener('click', () => {
+                const input = document.getElementById('pub-search');
+                if (input) input.value = '';
+                currentSearchTerm = '';
+                renderPublications();
+            });
             return;
         }
 
-        // 2. refresh from the single source of truth
+        list.innerHTML = items.map(r => {
+            const yearDisplay = r.year ? esc(r.year) : (r.kind === 'patent' ? '2021' : 'Pub');
+            const kindBadge = `<span class="pub-badge pub-badge--${esc(r.kind)}">${esc(KIND_LABELS[r.kind] || r.kind)}</span>`;
+            
+            const linkHtml = r.link ? `
+                <a href="${esc(r.link)}" target="_blank" rel="noopener noreferrer" class="pub-doi-btn">
+                    ${r.kind === 'book' ? 'Amazon ↗' : 'View Paper ↗'}
+                </a>` : '';
+
+            const venueHtml = r.venue ? `<p class="pub-item-venue">${esc(r.venue)}</p>` : '';
+            const metaHtml = r.meta ? `<span style="font-size: 0.8rem; color: var(--muted); margin-left: 0.5rem;">(${esc(r.meta)})</span>` : '';
+
+            return `
+                <div class="pub-item" data-kind="${esc(r.kind)}">
+                    <div class="pub-year-col">${yearDisplay}</div>
+                    <div class="pub-content-col">
+                        <h4 class="pub-item-title">
+                            ${r.link ? `<a href="${esc(r.link)}" target="_blank" rel="noopener noreferrer">${esc(r.title)}</a>` : esc(r.title)}
+                        </h4>
+                        <p class="pub-item-authors">
+                            ${highlightAuthor(r.authors || 'Karthikeyan S.')}
+                        </p>
+                        ${venueHtml}
+                        <div class="pub-item-actions">
+                            ${kindBadge}
+                            ${metaHtml}
+                            ${linkHtml}
+                        </div>
+                    </div>
+                </div>`;
+        }).join('');
+    }
+
+    function initPubToolbar() {
+        // Pill Buttons
+        const pillsContainer = document.getElementById('pub-pills');
+        if (pillsContainer) {
+            const totalPubs = ALL_RECORDS.filter(r => PUB_KINDS.includes(r.kind)).length;
+            const journalsCount = ALL_RECORDS.filter(r => r.kind === 'journal').length;
+            const confCount = ALL_RECORDS.filter(r => r.kind === 'conference').length;
+            const chapCount = ALL_RECORDS.filter(r => r.kind === 'chapter').length;
+            const bookCount = ALL_RECORDS.filter(r => r.kind === 'book').length;
+            const patentCount = ALL_RECORDS.filter(r => r.kind === 'patent').length;
+
+            pillsContainer.innerHTML = `
+                <button class="pub-pill-btn active" data-pub-filter="all">All <span class="pub-pill-count">(${totalPubs})</span></button>
+                <button class="pub-pill-btn" data-pub-filter="journal">Journals <span class="pub-pill-count">(${journalsCount})</span></button>
+                <button class="pub-pill-btn" data-pub-filter="conference">Conferences <span class="pub-pill-count">(${confCount})</span></button>
+                <button class="pub-pill-btn" data-pub-filter="chapter">Book Chapters <span class="pub-pill-count">(${chapCount})</span></button>
+                <button class="pub-pill-btn" data-pub-filter="book">Books <span class="pub-pill-count">(${bookCount})</span></button>
+                <button class="pub-pill-btn" data-pub-filter="patent">Patents <span class="pub-pill-count">(${patentCount})</span></button>
+            `;
+
+            pillsContainer.querySelectorAll('.pub-pill-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    pillsContainer.querySelectorAll('.pub-pill-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentPubFilter = btn.dataset.pubFilter;
+                    renderPublications();
+                });
+            });
+        }
+
+        // Search Input
+        const searchInput = document.getElementById('pub-search');
+        if (searchInput) {
+            let debounceTimer;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    currentSearchTerm = e.target.value;
+                    renderPublications();
+                }, 150);
+            });
+        }
+    }
+
+    /* ------------------------------------------------ Certifications Rendering */
+    function renderCertifications() {
+        const box = document.getElementById('cert-container');
+        if (!box) return;
+
+        const certKinds = ['fdp', 'workshop', 'course', 'certificate'];
+        const items = ALL_RECORDS.filter(r => certKinds.includes(r.kind));
+        if (!items.length) return;
+
+        box.innerHTML = items.map(r => `
+            <div class="cert-card">
+                <div class="cert-icon">${esc(r.icon || '🏅')}</div>
+                <div class="cert-body">
+                    <span class="cert-tag">${esc(r.kind === 'fdp' ? 'Faculty Development' : r.kind)}</span>
+                    <h4>${esc(r.title)}</h4>
+                    <p>${esc([r.venue, r.meta, r.year].filter(Boolean).join(' · '))}</p>
+                    ${r.link ? `<a href="${esc(r.link)}" target="_blank" rel="noopener noreferrer" style="font-size: 0.82rem; font-weight: 600; color: var(--teal); margin-top: 0.25rem; display: inline-block;">Verify Certificate →</a>` : ''}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    /* ------------------------------------------------ Memberships Rendering */
+    function renderMemberships() {
+        const box = document.getElementById('membership-container');
+        if (!box) return;
+
+        const items = ALL_RECORDS.filter(r => r.kind === 'membership');
+        if (!items.length) return;
+
+        box.innerHTML = items.map(r => `
+            <div class="membership-card">
+                ${r.image_url ? `<img src="${esc(r.image_url)}" alt="${esc(r.title)} Logo" class="membership-logo" loading="lazy">` : ''}
+                <div class="membership-info">
+                    <h4>${esc(r.title)}</h4>
+                    <p>${esc(r.venue || 'Professional Academic Society')}</p>
+                    ${r.meta ? `<span class="membership-id">${esc(r.meta)}</span>` : ''}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    /* ------------------------------------------------ Hero Stats Rendering */
+    function updateHeroStats() {
+        const pubCountEl = document.getElementById('hero-pub-count');
+        const pubTotal = ALL_RECORDS.filter(r => PUB_KINDS.includes(r.kind)).length;
+        if (pubCountEl && pubTotal) {
+            pubCountEl.textContent = `${pubTotal}+`;
+        }
+    }
+
+    function renderAll() {
+        initPubToolbar();
+        renderPublications();
+        renderCertifications();
+        renderMemberships();
+        updateHeroStats();
+        initReveal();
+    }
+
+    /* ------------------------------------------------ Data Fetching */
+    async function loadData() {
+        // 1. Try local cache
         try {
-            const db = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-            const { data, error } = await db.from('public_records').select('*');
-            if (error) throw error;
-            if (!data || !data.length) {
-                const preview = await loadPreviewData();
-                if (preview && preview.length) {
-                    renderAll(preview);
-                    return;
-                }
-            } else {
-                renderAll(data);
-                localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), records: data }));
+            const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+            if (cached && Array.isArray(cached.records) && cached.records.length) {
+                ALL_RECORDS = cached.records;
+                renderAll();
             }
-        } catch (err) {
-            console.error('records fetch failed:', err);
-            if (!cached) {
-                const preview = await loadPreviewData();
-                if (preview && preview.length) {
-                    renderAll(preview);
-                    return;
+        } catch (e) { /* ignore cache errors */ }
+
+        // 2. Fallback to bundled preview data if not populated yet
+        if (!ALL_RECORDS.length && window.PREVIEW_RECORDS && Array.isArray(window.PREVIEW_RECORDS)) {
+            ALL_RECORDS = window.PREVIEW_RECORDS;
+            renderAll();
+        }
+
+        // 3. Sync live from Supabase if configured
+        if (window.SUPABASE_READY && window.SUPABASE_READY() && window.supabase) {
+            try {
+                const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+                const { data, error } = await client.from('public_records').select('*');
+                if (!error && data && data.length) {
+                    ALL_RECORDS = data;
+                    localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), records: data }));
+                    renderAll();
                 }
-                failed('Content is temporarily unavailable. Please try again shortly.');
+            } catch (err) {
+                console.warn('Supabase sync notice:', err.message || err);
             }
         }
     }
 
-    load();
+    loadData();
 })();
-
-// Smooth navigation for hash links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            window.scrollTo({
-                top: target.offsetTop - 80, // Offset for sticky nav
-                behavior: 'smooth'
-            });
-        }
-    });
-});
