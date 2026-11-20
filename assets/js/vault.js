@@ -13,12 +13,13 @@
     var VAULT_BUILD = 'folder-view 2026-08-05';
     console.log('vault.js build:', VAULT_BUILD);
 
-    if (!window.SUPABASE_READY || !window.SUPABASE_READY()) {
+    if (!window.SUPABASE_READY || !window.SUPABASE_READY() || !window.supabase) {
         document.body.innerHTML =
-            '<div style="max-width:640px;margin:8rem auto;padding:2rem;font-family:Inter,sans-serif;' +
-            'color:#f8fafc;background:#1e293b;border-radius:16px;line-height:1.7">' +
-            '<h2>Vault not configured yet</h2><p>Open <code>supabase-config.js</code> and paste your ' +
-            'Supabase Project URL and anon key. Full steps are in <code>SETUP.md</code>.</p></div>';
+            '<div style="max-width:640px;margin:8rem auto;padding:2.5rem;font-family:Inter,sans-serif;' +
+            'color:#14213d;background:#ffffff;border:1px solid #dde2ec;border-radius:16px;box-shadow:0 10px 30px rgba(20,33,61,0.08);line-height:1.7">' +
+            '<h2 style="margin-bottom:0.75rem;color:#14213d;">Vault Configuration Notice</h2>' +
+            '<p style="color:#5d6882;margin-bottom:1.5rem;">Could not connect to the cloud database client. Ensure you are connected to the internet and your Supabase configuration is set in <code>assets/js/supabase-config.js</code>.</p>' +
+            '<p><a href="index.html" style="color:#0f766e;font-weight:600;text-decoration:none;">← Return to Portfolio</a></p></div>';
         return;
     }
 
@@ -540,11 +541,16 @@
 
     /* ----------------------------------------------------------------- init */
     (async function () {
-        var res = await db.auth.getSession();
-        if (res.data && res.data.session) {
-            state.user = res.data.session.user;
-            await boot();
-        } else {
+        try {
+            var res = await db.auth.getSession();
+            if (res && res.data && res.data.session) {
+                state.user = res.data.session.user;
+                await boot();
+            } else {
+                showLogin();
+            }
+        } catch (err) {
+            console.warn('Vault session initialization error:', err);
             showLogin();
         }
     })();

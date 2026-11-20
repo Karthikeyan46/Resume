@@ -6,36 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Vault | Karthikeyan.S</title>
+    <!-- Google Fonts: Newsreader (Editorial Serif) & Hanken Grotesk (Clean Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..800;1,300..800&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/vault.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
 </head>
 
 <body class="vault-body">
 
     <nav id="navbar" class="scrolled">
-        <ul class="nav-links">
-            <li><a href="index.html">← Portfolio</a></li>
-            <li><a href="#" id="nav-vault" class="active">Vault</a></li>
-            <li><a href="http://127.0.0.1:5050" target="_blank" title="Launch Local SQLite Dashboard" style="color: #818cf8; font-weight: 600;">⚡ SQLite DB Dashboard</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <span class="nav-brand-dot"></span>
+                Prof. Karthikeyan S.
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">← Back to Portfolio</a></li>
+                <li><a href="vault.html" id="nav-vault" class="active">Vault 🔒</a></li>
+                <li><a href="http://127.0.0.1:5050" target="_blank" title="Launch Local SQLite Dashboard" style="color: var(--teal); font-weight: 600;">⚡ SQLite DB (Port 5050)</a></li>
+            </ul>
+        </div>
     </nav>
 
     <!-- ================= LOGIN ================= -->
-    <section id="login-view" class="vault-section" hidden>
+    <section id="login-view" class="vault-section">
         <div class="login-card card">
             <h2>Private Vault</h2>
-            <p class="muted">Certificates, papers and proofs. Only you can open this.</p>
+            <p class="muted">Certificates, degree proofs, and research documents. Enter your credentials to access.</p>
 
             <form id="login-form">
                 <label for="email">Email</label>
-                <input id="email" type="email" autocomplete="username" required>
+                <input id="email" type="email" autocomplete="username" placeholder="link2karthikcse@gmail.com" required>
 
                 <label for="password">Password</label>
-                <input id="password" type="password" autocomplete="current-password" required>
+                <input id="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
 
-                <button type="submit" class="btn btn-primary full" id="login-btn">Sign in</button>
+                <button type="submit" class="btn btn-teal full" id="login-btn">Sign in</button>
             </form>
 
             <button type="button" class="linkish" id="forgot-btn">Forgot password?</button>
