@@ -1,6 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/vault", "destination": "/vault.html" }
+  ],
   "redirects": [
     { "source": "/profile.jpg", "destination": "/assets/img/profile.jpg", "permanent": true },
     { "source": "/book-cover.jpg", "destination": "/assets/img/book-cover.jpg", "permanent": true },
