@@ -1,0 +1,13 @@
+# Vercel deployment ignore - Keep deployment 100% pure static
+app.py
+database.py
+portfolio.db
+requirements.txt
+run_dashboard.bat
+templates/
+static/
+tools/
+.tempmediaStorage/
+.system_generated/
+browser/
+_archive/

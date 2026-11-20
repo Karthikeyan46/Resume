@@ -41,9 +41,10 @@
 }
 
 .login-card h2 {
-    font-family: var(--font-serif);
-    font-size: 1.75rem;
-    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--text);
     margin-bottom: 0.4rem;
 }
 

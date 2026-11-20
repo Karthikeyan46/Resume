@@ -1,14 +1,104 @@
 /* ===========================================================================
-   Academic Portfolio Script — Inspired by aanchalvij.com
-   - Editorial scholarly presentation
-   - Real-time client-side publication filtering & live search
-   - Seamless data sync from Supabase with instant fallback to bundled preview data
+   Prof. Karthikeyan S. — Academic Portfolio Script
+   Features:
+   - Interactive Smooth Cursor Motion & Follower Ring
+   - Real-time Card Spotlight Cursor Reflection
+   - Hero Parallax Ambient Movement
+   - Instant Publication Category Filtering & Live Search
+   - Real-time Sync from Supabase with Bundled Seed Fallback
    =========================================================================== */
 
 (function () {
     'use strict';
 
-    // Sticky Navbar shadow on scroll
+    /* =======================================================================
+       1. Interactive Cursor Motion & Mouse Follower
+       ======================================================================= */
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (isFinePointer) {
+        const dot = document.createElement('div');
+        dot.className = 'cursor-dot';
+        const ring = document.createElement('div');
+        ring.className = 'cursor-ring';
+        document.body.appendChild(dot);
+        document.body.appendChild(ring);
+
+        let mouseX = -100, mouseY = -100;
+        let ringX = -100, ringY = -100;
+        let isMoving = false;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+
+            if (!isMoving) {
+                isMoving = true;
+                dot.style.opacity = '1';
+                ring.style.opacity = '1';
+            }
+        }, { passive: true });
+
+        // Physics-based smooth spring follow loop
+        function renderCursor() {
+            ringX += (mouseX - ringX) * 0.18;
+            ringY += (mouseY - ringY) * 0.18;
+            ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
+            requestAnimationFrame(renderCursor);
+        }
+        requestAnimationFrame(renderCursor);
+
+        // Hover expansion on interactive nodes
+        const interactiveSelector = 'a, button, input, select, textarea, .pub-pill-btn, .spotlight-card, .course-chip, summary';
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest(interactiveSelector)) {
+                ring.classList.add('cursor-active');
+            }
+        });
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest(interactiveSelector)) {
+                ring.classList.remove('cursor-active');
+            }
+        });
+
+        document.addEventListener('mouseleave', () => {
+            dot.style.opacity = '0';
+            ring.style.opacity = '0';
+            isMoving = false;
+        });
+    }
+
+    /* =======================================================================
+       2. Dynamic Card Spotlight & Hero Ambient Motion
+       ======================================================================= */
+    function initCardSpotlights() {
+        document.querySelectorAll('.spotlight-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            }, { passive: true });
+        });
+    }
+
+    // Hero subtle parallax on mouse move
+    const hero = document.getElementById('home');
+    if (hero) {
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            hero.style.setProperty('--cursor-x', x);
+            hero.style.setProperty('--cursor-y', y);
+        }, { passive: true });
+    }
+
+    /* =======================================================================
+       3. Navigation, Scroll Reveal & Smooth Scrolling
+       ======================================================================= */
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 40) {
@@ -18,22 +108,19 @@
         }
     }, { passive: true });
 
-    // Mobile nav toggle
+    // Mobile nav drawer
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', () => {
             navMenu.classList.toggle('open');
         });
-        // Close menu on link click
         navMenu.querySelectorAll('.nav-links a').forEach(a => {
-            a.addEventListener('click', () => {
-                navMenu.classList.remove('open');
-            });
+            a.addEventListener('click', () => navMenu.classList.remove('open'));
         });
     }
 
-    // Scroll-reveal animations
+    // Scroll reveal observer
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -45,9 +132,8 @@
     function initReveal() {
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     }
-    initReveal();
 
-    // Smooth scroll for anchor links
+    // Smooth scroll for anchors
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
@@ -55,7 +141,7 @@
             const target = document.querySelector(targetId);
             if (target) {
                 e.preventDefault();
-                const navH = navbar ? navbar.offsetHeight : 68;
+                const navH = navbar ? navbar.offsetHeight : 70;
                 const top = target.getBoundingClientRect().top + window.pageYOffset - navH;
                 window.scrollTo({ top, behavior: 'smooth' });
             }
@@ -82,9 +168,9 @@
     }
 
     /* =======================================================================
-       Data Layer — Supabase + Bundled Preview Records Fallback
+       4. Data Layer — Publications, Certifications & Memberships
        ======================================================================= */
-    const CACHE_KEY = 'portfolio_records_v3';
+    const CACHE_KEY = 'portfolio_records_v4';
     let ALL_RECORDS = [];
     let currentPubFilter = 'all';
     let currentSearchTerm = '';
@@ -95,20 +181,20 @@
 
     const PUB_KINDS = ['journal', 'conference', 'chapter', 'book', 'patent'];
     const KIND_LABELS = {
-        journal: 'Journal',
-        conference: 'Conference',
+        journal: 'Journal Paper',
+        conference: 'Conference Proceeding',
         chapter: 'Book Chapter',
-        book: 'Book',
-        patent: 'Patent',
-        fdp: 'Faculty Development',
+        book: 'Authored Book',
+        patent: 'Intellectual Property Patent',
+        fdp: 'Faculty Development Program',
         workshop: 'Workshop',
-        course: 'Certification Course',
-        membership: 'Membership',
-        role: 'Role'
+        course: 'Professional Certification',
+        membership: 'Academic Society',
+        role: 'Institutional Role'
     };
 
     function highlightAuthor(text) {
-        if (!text) return '<strong>Karthikeyan S.</strong>';
+        if (!text) return '<strong class="author-highlight">Karthikeyan S.</strong>';
         return text.replace(/(Karthikeyan(\s+S\.?|\s+Selvaraj)?|Selvaraj\s+Karthikeyan)/gi, '<strong class="author-highlight">$1</strong>');
     }
 
@@ -118,14 +204,12 @@
         const countBox = document.getElementById('pub-count-label');
         if (!list) return;
 
-        // Filter by kind
         let items = ALL_RECORDS.filter(r => PUB_KINDS.includes(r.kind));
 
         if (currentPubFilter !== 'all') {
             items = items.filter(r => r.kind === currentPubFilter);
         }
 
-        // Filter by search query
         if (currentSearchTerm.trim()) {
             const q = currentSearchTerm.toLowerCase();
             items = items.filter(r => 
@@ -136,18 +220,17 @@
             );
         }
 
-        // Sort by year descending, then sort_order
         items.sort((a, b) => (b.year || 0) - (a.year || 0) || (a.sort_order || 0) - (b.sort_order || 0));
 
         if (countBox) {
-            countBox.textContent = `Showing ${items.length} of ${ALL_RECORDS.filter(r => PUB_KINDS.includes(r.kind)).length} scholarly works`;
+            countBox.textContent = `Showing ${items.length} of ${ALL_RECORDS.filter(r => PUB_KINDS.includes(r.kind)).length} scholarly contributions`;
         }
 
         if (!items.length) {
             list.innerHTML = `
-                <div style="padding: 3rem 2rem; text-align: center; color: var(--muted);">
-                    <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">No publications matching "<strong>${esc(currentSearchTerm)}</strong>".</p>
-                    <button class="btn btn-secondary btn-sm" id="reset-pub-search" style="margin-top: 0.5rem;">Clear search</button>
+                <div style="padding: 3.5rem 2rem; text-align: center; color: var(--muted);">
+                    <p style="font-size: 1.1rem; margin-bottom: 0.75rem;">No publications matching "<strong>${esc(currentSearchTerm)}</strong>".</p>
+                    <button class="btn btn-secondary btn-sm" id="reset-pub-search">Clear Search Filter</button>
                 </div>`;
             const resetBtn = document.getElementById('reset-pub-search');
             if (resetBtn) resetBtn.addEventListener('click', () => {
@@ -165,11 +248,11 @@
             
             const linkHtml = r.link ? `
                 <a href="${esc(r.link)}" target="_blank" rel="noopener noreferrer" class="pub-doi-btn">
-                    ${r.kind === 'book' ? 'Amazon ↗' : 'View Paper ↗'}
+                    ${r.kind === 'book' ? 'Amazon Listing ↗' : 'View Publication ↗'}
                 </a>` : '';
 
             const venueHtml = r.venue ? `<p class="pub-item-venue">${esc(r.venue)}</p>` : '';
-            const metaHtml = r.meta ? `<span style="font-size: 0.8rem; color: var(--muted); margin-left: 0.5rem;">(${esc(r.meta)})</span>` : '';
+            const metaHtml = r.meta ? `<span style="font-size: 0.8rem; color: var(--muted); margin-left: 0.4rem;">(${esc(r.meta)})</span>` : '';
 
             return `
                 <div class="pub-item" data-kind="${esc(r.kind)}">
@@ -193,7 +276,6 @@
     }
 
     function initPubToolbar() {
-        // Pill Buttons
         const pillsContainer = document.getElementById('pub-pills');
         if (pillsContainer) {
             const totalPubs = ALL_RECORDS.filter(r => PUB_KINDS.includes(r.kind)).length;
@@ -222,7 +304,6 @@
             });
         }
 
-        // Search Input
         const searchInput = document.getElementById('pub-search');
         if (searchInput) {
             let debounceTimer;
@@ -246,13 +327,13 @@
         if (!items.length) return;
 
         box.innerHTML = items.map(r => `
-            <div class="cert-card">
+            <div class="cert-card spotlight-card">
                 <div class="cert-icon">${esc(r.icon || '🏅')}</div>
                 <div class="cert-body">
                     <span class="cert-tag">${esc(r.kind === 'fdp' ? 'Faculty Development' : r.kind)}</span>
                     <h4>${esc(r.title)}</h4>
                     <p>${esc([r.venue, r.meta, r.year].filter(Boolean).join(' · '))}</p>
-                    ${r.link ? `<a href="${esc(r.link)}" target="_blank" rel="noopener noreferrer" style="font-size: 0.82rem; font-weight: 600; color: var(--teal); margin-top: 0.25rem; display: inline-block;">Verify Certificate →</a>` : ''}
+                    ${r.link ? `<a href="${esc(r.link)}" target="_blank" rel="noopener noreferrer" style="font-size: 0.82rem; font-weight: 700; color: var(--primary); margin-top: 0.25rem; display: inline-block;">Verify Credential →</a>` : ''}
                 </div>
             </div>
         `).join('');
@@ -267,18 +348,17 @@
         if (!items.length) return;
 
         box.innerHTML = items.map(r => `
-            <div class="membership-card">
+            <div class="membership-card spotlight-card">
                 ${r.image_url ? `<img src="${esc(r.image_url)}" alt="${esc(r.title)} Logo" class="membership-logo" loading="lazy">` : ''}
                 <div class="membership-info">
                     <h4>${esc(r.title)}</h4>
-                    <p>${esc(r.venue || 'Professional Academic Society')}</p>
+                    <p>${esc(r.venue || 'Professional Computing Society')}</p>
                     ${r.meta ? `<span class="membership-id">${esc(r.meta)}</span>` : ''}
                 </div>
             </div>
         `).join('');
     }
 
-    /* ------------------------------------------------ Hero Stats Rendering */
     function updateHeroStats() {
         const pubCountEl = document.getElementById('hero-pub-count');
         const pubTotal = ALL_RECORDS.filter(r => PUB_KINDS.includes(r.kind)).length;
@@ -294,26 +374,24 @@
         renderMemberships();
         updateHeroStats();
         initReveal();
+        initCardSpotlights();
     }
 
     /* ------------------------------------------------ Data Fetching */
     async function loadData() {
-        // 1. Try local cache
         try {
             const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
             if (cached && Array.isArray(cached.records) && cached.records.length) {
                 ALL_RECORDS = cached.records;
                 renderAll();
             }
-        } catch (e) { /* ignore cache errors */ }
+        } catch (e) { /* ignore cache parse error */ }
 
-        // 2. Fallback to bundled preview data if not populated yet
         if (!ALL_RECORDS.length && window.PREVIEW_RECORDS && Array.isArray(window.PREVIEW_RECORDS)) {
             ALL_RECORDS = window.PREVIEW_RECORDS;
             renderAll();
         }
 
-        // 3. Sync live from Supabase if configured
         if (window.SUPABASE_READY && window.SUPABASE_READY() && window.supabase) {
             try {
                 const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
